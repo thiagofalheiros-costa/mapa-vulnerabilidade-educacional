@@ -1,71 +1,151 @@
-import logging
+"""
+Funções utilitárias do projeto.
+"""
+
 import re
 import unicodedata
+from pathlib import Path
 
 import pandas as pd
 
 
-# ============================================================
-# 1. Configuração do sistema de logs
-# ============================================================
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-
-logger = logging.getLogger(__name__)
+def create_directory(path: Path) -> None:
+    """
+    Cria uma pasta e seus diretórios superiores caso não existam.
+    """
+    path.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
 
-# ============================================================
-# 2. Função para limpar nomes de colunas
-# ============================================================
+def list_files(
+    path: Path,
+    recursive: bool = False,
+) -> list[Path]:
+    """
+    Lista os arquivos existentes em uma pasta.
 
-def limpar_nome_coluna(nome: str) -> str:
+    Parameters
+    ----------
+    path:
+        Pasta que será inspecionada.
+
+    recursive:
+        Se verdadeiro, procura também nas subpastas.
+
+    Returns
+    -------
+    list[Path]
+        Lista ordenada de caminhos.
+    """
+    if not path.exists():
+        raise FileNotFoundError(
+            f"A pasta informada não existe: {path}"
+        )
+
+    pattern = "**/*" if recursive else "*"
+
+    return sorted(
+        file
+        for file in path.glob(pattern)
+        if file.is_file()
+    )
+
+
+def normalize_column_name(column: object) -> str:
     """
     Padroniza o nome de uma coluna.
 
-    Exemplo:
-        "Taxa de Aprovação (%)"
-        torna-se
-        "taxa_de_aprovacao"
+    Exemplo
+    -------
+    'Código do Município' se torna 'CODIGO_DO_MUNICIPIO'.
     """
+    column = str(column).strip()
 
-    nome = nome.strip().lower()
-
-    nome = unicodedata.normalize(
+    column = unicodedata.normalize(
         "NFKD",
-        nome
+        column,
     )
 
-    nome = nome.encode(
-        "ascii",
-        errors="ignore"
-    ).decode("utf-8")
+    column = "".join(
+        character
+        for character in column
+        if not unicodedata.combining(character)
+    )
 
-    nome = re.sub(
-        r"[^a-z0-9]+",
+    column = column.upper()
+
+    column = re.sub(
+        r"[^A-Z0-9]+",
         "_",
-        nome
+        column,
     )
 
-    nome = nome.strip("_")
+    column = re.sub(
+        r"_+",
+        "_",
+        column,
+    )
 
-    return nome
+    return column.strip("_")
 
 
-def limpar_colunas(df: pd.DataFrame) -> pd.DataFrame:
+def normalize_columns(
+    df: pd.DataFrame,
+) -> pd.DataFrame:
     """
-    Retorna uma cópia do DataFrame com os nomes
-    das colunas padronizados.
+    Padroniza os nomes de todas as colunas do DataFrame.
+
+    O DataFrame original não é alterado.
     """
+    normalized_df = df.copy()
 
-    df = df.copy()
-
-    df.columns = [
-        limpar_nome_coluna(coluna)
-        for coluna in df.columns
+    normalized_df.columns = [
+        normalize_column_name(column)
+        for column in normalized_df.columns
     ]
 
-    return df
+    return normalized_df
+
+def validate_required_columns(
+    df: pd.DataFrame,
+    required_columns: list[str],
+    dataset_name: str = "base",
+) -> None:
+    """
+    Verifica se o DataFrame possui todas as colunas obrigatórias.
+
+    Parameters
+    ----------
+    df:
+        DataFrame que será validado.
+
+    required_columns:
+        Nomes das colunas esperadas.
+
+    dataset_name:
+        Nome usado na mensagem de erro.
+
+    Raises
+    ------
+    ValueError
+        Quando uma ou mais colunas obrigatórias não existem.
+    """
+    normalized_required_columns = {
+        normalize_column_name(column)
+        for column in required_columns
+    }
+
+    available_columns = set(df.columns)
+
+    missing_columns = (
+        normalized_required_columns
+        - available_columns
+    )
+
+    if missing_columns:
+        raise ValueError(
+            f"A base '{dataset_name}' não possui as colunas "
+            f"obrigatórias: {sorted(missing_columns)}"
+        )
