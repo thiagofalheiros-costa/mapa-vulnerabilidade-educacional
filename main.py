@@ -2,10 +2,9 @@
 Ponto de entrada do projeto.
 """
 
-from src.config import CENSO_DIR
-from src.load_data import read_data
+from src.config import CENSO_DIR, TABLES_DIR
+from src.inspect_data import inspect_directory
 from src.logger import setup_logger
-from src.utils import validate_required_columns
 
 
 logger = setup_logger()
@@ -13,40 +12,36 @@ logger = setup_logger()
 
 def main() -> None:
     """
-    Executa o teste inicial do leitor de dados.
+    Executa a inspeção inicial do Censo Escolar.
     """
     logger.info(
-        "Iniciando o projeto Mapa de Vulnerabilidade Educacional."
+        "Iniciando inspeção do Censo Escolar."
     )
 
-    file_path = CENSO_DIR / "teste_censo.csv"
-
-    df = read_data(
-        file_path=file_path,
-    )
-
-    validate_required_columns(
-        df=df,
-        required_columns=[
-            "Código da Entidade",
-            "Código do Município",
-            "UF",
+    reports = inspect_directory(
+        input_directory=CENSO_DIR,
+        output_directory=TABLES_DIR,
+        sample_size=5_000,
+        report_prefix="censo_escolar_2024",
+        filename_terms=[
+            "microdados",
+            "educacao_basica",
+            "ed_basica",
         ],
-        dataset_name="Censo Escolar de teste",
     )
 
-    logger.info(
-        "Validação das colunas concluída com sucesso."
-    )
+    summary = reports["resumo"]
+    columns = reports["colunas"]
+    sample = reports["amostra"]
 
-    print("\nPrimeiras linhas:\n")
-    print(df.head())
+    print("\nResumo da base:\n")
+    print(summary.to_string(index=False))
 
-    print("\nColunas normalizadas:\n")
-    print(df.columns.tolist())
+    print("\nPrimeiras 20 colunas do relatório:\n")
+    print(columns.head(20).to_string(index=False))
 
-    print("\nTipos das colunas:\n")
-    print(df.dtypes)
+    print("\nAmostra dos dados:\n")
+    print(sample.head().to_string(index=False))
 
 
 if __name__ == "__main__":

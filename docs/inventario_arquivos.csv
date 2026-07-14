@@ -1,0 +1,39 @@
+﻿nome,extensao,caminho,tamanho_mb
+.gitkeep,,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\.gitkeep,0.0
+microdados_censo_escolar_2024.zip,.zip,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\microdados_censo_escolar_2024.zip,32.26
+TDI_2024_ESCOLAS.zip,.zip,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\distorcao\TDI_2024_ESCOLAS.zip,33.37
+DTB_2024.zip,.zip,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\DTB_2024.zip,1.78
+RS_Municipios_2024.zip,.zip,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\malha_municipal\RS_Municipios_2024.zip,9.15
+tx_rend_escolas_2024.zip,.zip,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\rendimento\tx_rend_escolas_2024.zip,66.5
+md5_tx_rend_escolas_2024.txt,.txt,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\rendimento\2024\tx_rend_escolas_2024\md5_tx_rend_escolas_2024.txt,0.0
+tx_rend_escolas_2024.ods,.ods,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\rendimento\2024\tx_rend_escolas_2024\tx_rend_escolas_2024.ods,30.79
+tx_rend_escolas_2024.xlsx,.xlsx,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\rendimento\2024\tx_rend_escolas_2024\tx_rend_escolas_2024.xlsx,37.08
+RS_Municipios_2024.cpg,.cpg,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\malha_municipal\2024\RS_Municipios_2024.cpg,0.0
+RS_Municipios_2024.dbf,.dbf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\malha_municipal\2024\RS_Municipios_2024.dbf,0.25
+RS_Municipios_2024.prj,.prj,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\malha_municipal\2024\RS_Municipios_2024.prj,0.0
+RS_Municipios_2024.shp,.shp,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\malha_municipal\2024\RS_Municipios_2024.shp,12.3
+RS_Municipios_2024.shx,.shx,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\malha_municipal\2024\RS_Municipios_2024.shx,0.0
+Distritos_novos_e_extintos.ods,.ods,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\Distritos_novos_e_extintos.ods,0.03
+Distritos_novos_e_extintos.xls,.xls,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\Distritos_novos_e_extintos.xls,0.01
+RELATORIO_DTB_BRASIL_2024_DISTRITOS.ods,.ods,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\RELATORIO_DTB_BRASIL_2024_DISTRITOS.ods,0.56
+RELATORIO_DTB_BRASIL_2024_DISTRITOS.xls,.xls,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\RELATORIO_DTB_BRASIL_2024_DISTRITOS.xls,3.02
+RELATORIO_DTB_BRASIL_2024_MUNICIPIOS.ods,.ods,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\RELATORIO_DTB_BRASIL_2024_MUNICIPIOS.ods,0.19
+RELATORIO_DTB_BRASIL_2024_MUNICIPIOS.xls,.xls,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\RELATORIO_DTB_BRASIL_2024_MUNICIPIOS.xls,0.96
+RELATORIO_DTB_BRASIL_2024_SUBDISTRITOS.ods,.ods,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\RELATORIO_DTB_BRASIL_2024_SUBDISTRITOS.ods,0.04
+RELATORIO_DTB_BRASIL_2024_SUBDISTRITOS.xls,.xls,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\ibge\2024\RELATORIO_DTB_BRASIL_2024_SUBDISTRITOS.xls,0.17
+MD5_TDI_ESCOLAS_2024.txt,.txt,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\distorcao\2024\TDI_2024_ESCOLAS\MD5_TDI_ESCOLAS_2024.txt,0.0
+TDI_ESCOLAS_2024.ods,.ods,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\distorcao\2024\TDI_2024_ESCOLAS\TDI_ESCOLAS_2024.ods,16.4
+TDI_ESCOLAS_2024.xlsx,.xlsx,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\distorcao\2024\TDI_2024_ESCOLAS\TDI_ESCOLAS_2024.xlsx,17.84
+md5_microdados_ed_basica_2024.txt,.txt,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\dados\md5_microdados_ed_basica_2024.txt,0.0
+microdados_ed_basica_2024.csv,.csv,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\dados\microdados_ed_basica_2024.csv,207.83
+suplemento_cursos_tecnicos_2024.csv,.csv,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\dados\suplemento_cursos_tecnicos_2024.csv,4.5
+Leia-me.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\leia-me\Leia-me.pdf,0.18
+dicionário_dados_educação_básica.xlsx,.xlsx,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO I - Dicionário de Dados\dicionário_dados_educação_básica.xlsx,0.12
+~$Dicionário de Dados da Educação Básica.xlsx,.xlsx,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO I - Dicionário de Dados\~$Dicionário de Dados da Educação Básica.xlsx,0.0
+~$dicionário_dados_educação_básica.xlsx,.xlsx,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO I - Dicionário de Dados\~$dicionário_dados_educação_básica.xlsx,0.0
+Aluno 2024.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO II -  Questionários do Censo da Educação Basica\Aluno 2024.pdf,0.07
+Escola 2024.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO II -  Questionários do Censo da Educação Basica\Escola 2024.pdf,0.1
+Escola Nova 2024.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO II -  Questionários do Censo da Educação Basica\Escola Nova 2024.pdf,0.07
+Gestor Escolar 2024.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO II -  Questionários do Censo da Educação Basica\Gestor Escolar 2024.pdf,0.06
+Profissional Escolar 2024.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO II -  Questionários do Censo da Educação Basica\Profissional Escolar 2024.pdf,0.07
+Turma 2024.pdf,.pdf,C:\Users\thiag\OneDrive\Documentos\mapa_vulnerabilidade_educacional\data\raw\censo_escolar\2024\Anexos\ANEXO II -  Questionários do Censo da Educação Basica\Turma 2024.pdf,0.08
