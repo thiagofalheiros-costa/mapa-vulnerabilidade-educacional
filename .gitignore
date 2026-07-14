@@ -1,0 +1,49 @@
+# Ambiente virtual
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente
+.env
+
+# Logs
+*.log
+
+# Modelos gerados
+models/*.pkl
+models/*.joblib
+
+# Relatórios gerados
+reports/figures/*
+reports/maps/*
+reports/tables/*
+
+# Dados
+data/raw/*
+data/interim/*
+data/processed/*
+data/external/*
+
+# Manter estrutura das pastas
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+!reports/figures/.gitkeep
+!reports/maps/.gitkeep
+!reports/tables/.gitkeep
