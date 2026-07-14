@@ -1,44 +1,70 @@
+"""
+Configurações globais do projeto.
+
+Autor: Thiago Falheiros
+Projeto: Mapa de Vulnerabilidade Educacional
+"""
 
 from pathlib import Path
 
-# ============================================================
-# Estrutura de diretórios
-# ============================================================
+# ==========================================================
+# Diretórios do projeto
+# ==========================================================
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-DATA_DIR = ROOT_DIR / "data"
+DATA_DIR = PROJECT_ROOT / "data"
 
 RAW_DIR = DATA_DIR / "raw"
 INTERIM_DIR = DATA_DIR / "interim"
 PROCESSED_DIR = DATA_DIR / "processed"
 EXTERNAL_DIR = DATA_DIR / "external"
 
-MODELS_DIR = ROOT_DIR / "models"
+REPORTS_DIR = PROJECT_ROOT / "reports"
 
-REPORTS_DIR = ROOT_DIR / "reports"
 FIGURES_DIR = REPORTS_DIR / "figures"
-MAPS_DIR = REPORTS_DIR / "maps"
 TABLES_DIR = REPORTS_DIR / "tables"
+MAPS_DIR = REPORTS_DIR / "maps"
 
-OUTPUT_DIR = ROOT_DIR / "outputs"
+MODELS_DIR = PROJECT_ROOT / "models"
 
-# ============================================================
-# Criação automática das pastas
-# ============================================================
+DOCS_DIR = PROJECT_ROOT / "docs"
 
-DIRECTORIES = [
-    RAW_DIR,
-    INTERIM_DIR,
-    PROCESSED_DIR,
-    EXTERNAL_DIR,
-    MODELS_DIR,
-    REPORTS_DIR,
-    FIGURES_DIR,
-    MAPS_DIR,
-    TABLES_DIR,
-    OUTPUT_DIR
-]
+# ==========================================================
+# Bases de dados
+# ==========================================================
 
-for folder in DIRECTORIES:
-    folder.mkdir(parents=True, exist_ok=True)
+CENSO_DIR = RAW_DIR / "censo_escolar"
+RENDIMENTO_DIR = RAW_DIR / "rendimento"
+DISTORCAO_DIR = RAW_DIR / "distorcao"
+INSE_DIR = RAW_DIR / "inse"
+IBGE_DIR = RAW_DIR / "ibge"
+MALHA_DIR = RAW_DIR / "malha_municipal"
+
+# ==========================================================
+# Configurações do projeto
+# ==========================================================
+
+ANO_BASE = 2024
+
+UF = "RS"
+
+RANDOM_STATE = 43
+
+ENCODING = "latin1"
+
+CSV_SEPARATOR = ";"
+
+# ==========================================================
+# Colunas de identificação
+# ==========================================================
+
+COL_ENTIDADE = "CO_ENTIDADE"
+
+COL_MUNICIPIO = "CO_MUNICIPIO"
+
+COL_UF = "SG_UF"
+
+COL_NOME_MUNICIPIO = "NO_MUNICIPIO"
+
+COL_NOME_ESCOLA = "NO_ENTIDADE"
