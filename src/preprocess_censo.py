@@ -8,9 +8,11 @@ import pandas as pd
 
 from src.load_data import read_data
 from src.metadata.selectors import get_censo_columns
+from src.metadata.common import (
+    CODIGO_ESCOLA_ATIVA,
+    DEPENDENCIAS_PUBLICAS,
+)
 
-
-DEPENDENCIAS_PUBLICAS = [1, 2, 3]
 
 
 def load_censo(
@@ -30,15 +32,15 @@ def load_censo(
 def filter_censo(
     df: pd.DataFrame,
     uf: str = "RS",
-    active_school_code: int = 1,
+    active_school_code: int = CODIGO_ESCOLA_ATIVA,
 ) -> pd.DataFrame:
     """
-    Filtra escolas do recorte inicial do projeto.
+    Filtra o Censo Escolar para o recorte do projeto.
 
     Mantém:
     - a UF selecionada;
-    - escolas em funcionamento;
-    - dependências federal, estadual e municipal.
+    - escolas em atividade;
+    - dependências públicas.
     """
     filtered_df = df.loc[
         (df["SG_UF"] == uf)
