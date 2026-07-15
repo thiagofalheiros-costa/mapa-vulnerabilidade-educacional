@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 from src.load_data import read_data
-from src.metadata.selectors import get_censo_columns
+from src.selectors import get_censo_columns
 from src.metadata.common import (
     CODIGO_ESCOLA_ATIVA,
     DEPENDENCIAS_PUBLICAS,
