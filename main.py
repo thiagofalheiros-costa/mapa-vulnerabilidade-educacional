@@ -1,47 +1,90 @@
 """
-Ponto de entrada do projeto.
+Pré-processamento e validação do Censo Escolar.
 """
 
-from src.config import CENSO_DIR, TABLES_DIR
-from src.inspect_data import inspect_directory
+from src.config import (
+    CENSO_DIR,
+    INTERIM_DIR,
+    TABLES_DIR,
+    UF,
+)
+from src.inspect_data import (
+    find_data_files,
+    select_main_data_file,
+)
 from src.logger import setup_logger
+from src.metadata.preprocess_censo import preprocess_censo
+from src.utils import create_directory
+from src.validate_censo import validate_censo
 
 
 logger = setup_logger()
 
 
 def main() -> None:
-    """
-    Executa a inspeção inicial do Censo Escolar.
-    """
     logger.info(
-        "Iniciando inspeção do Censo Escolar."
+        "Iniciando pipeline do Censo Escolar."
     )
 
-    reports = inspect_directory(
-        input_directory=CENSO_DIR,
-        output_directory=TABLES_DIR,
-        sample_size=5_000,
-        report_prefix="censo_escolar_2024",
+    files = find_data_files(CENSO_DIR)
+
+    main_file = select_main_data_file(
+        files=files,
         filename_terms=[
-            "microdados",
-            "educacao_basica",
-            "ed_basica",
+            "microdados_ed_basica_2024",
         ],
     )
 
-    summary = reports["resumo"]
-    columns = reports["colunas"]
-    sample = reports["amostra"]
+    df = preprocess_censo(
+        file_path=main_file,
+        uf=UF,
+    )
 
-    print("\nResumo da base:\n")
-    print(summary.to_string(index=False))
+    quality_report = validate_censo(df)
 
-    print("\nPrimeiras 20 colunas do relatório:\n")
-    print(columns.head(20).to_string(index=False))
+    create_directory(INTERIM_DIR)
+    create_directory(TABLES_DIR)
 
-    print("\nAmostra dos dados:\n")
-    print(sample.head().to_string(index=False))
+    parquet_path = (
+        INTERIM_DIR
+        / "censo_escolar_rs_2024.parquet"
+    )
+
+    quality_path = (
+        TABLES_DIR
+        / "qualidade_censo_escolar_rs_2024.csv"
+    )
+
+    df.to_parquet(
+        parquet_path,
+        index=False,
+    )
+
+    quality_report.to_csv(
+        quality_path,
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    logger.info(
+        "Base intermediária salva em: %s",
+        parquet_path,
+    )
+
+    logger.info(
+        "Relatório de qualidade salvo em: %s",
+        quality_path,
+    )
+
+    print("\nDimensão da base:")
+    print(df.shape)
+
+    print("\nRelatório de qualidade:")
+    print(
+        quality_report
+        .head(10)
+        .to_string(index=False)
+    )
 
 
 if __name__ == "__main__":
