@@ -1,5 +1,8 @@
 """
 Feature engineering do Censo Escolar.
+
+Este módulo cria indicadores binários de infraestrutura,
+localização e dependência administrativa no nível da escola.
 """
 
 import pandas as pd
@@ -22,21 +25,65 @@ INFRA_COLUMNS = [
 ]
 
 
+BASE_COLUMNS = [
+    "TP_DEPENDENCIA",
+    "TP_LOCALIZACAO",
+    *INFRA_COLUMNS,
+]
+
+
+def validate_feature_columns(
+    dataframe: pd.DataFrame,
+) -> None:
+    """
+    Verifica as colunas necessárias para criar as features.
+
+    Parameters
+    ----------
+    dataframe:
+        Base do Censo Escolar.
+
+    Raises
+    ------
+    ValueError
+        Caso alguma coluna obrigatória esteja ausente.
+    """
+    missing_columns = [
+        column
+        for column in BASE_COLUMNS
+        if column not in dataframe.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            "Não foi possível criar as features do Censo. "
+            f"Colunas ausentes: {missing_columns}"
+        )
+
+
 def create_infrastructure_score(
-    df: pd.DataFrame,
+    dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Cria o score de infraestrutura escolar.
+    Cria o score médio de infraestrutura por escola.
 
-    O score corresponde à média dos indicadores binários
-    de infraestrutura disponíveis para cada escola.
+    Parameters
+    ----------
+    dataframe:
+        Base escolar contendo indicadores binários de infraestrutura.
 
-    O resultado varia entre zero e um:
-
-    - zero: nenhum item de infraestrutura disponível;
-    - um: todos os itens de infraestrutura disponíveis.
+    Returns
+    -------
+    pandas.DataFrame
+        Base com a coluna INFRA_SCORE.
     """
-    feature_df = df.copy()
+    feature_df = dataframe.copy()
+
+    for column in INFRA_COLUMNS:
+        feature_df[column] = pd.to_numeric(
+            feature_df[column],
+            errors="coerce",
+        )
 
     feature_df["INFRA_SCORE"] = (
         feature_df[INFRA_COLUMNS]
@@ -52,72 +99,76 @@ def create_infrastructure_score(
 
 
 def create_public_network_flags(
-    df: pd.DataFrame,
+    dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Cria indicadores binários de rede e localização.
+    Cria indicadores de rede pública e localização.
 
-    Dependências administrativas:
+    Parameters
+    ----------
+    dataframe:
+        Base do Censo Escolar.
 
-    - 1: federal;
-    - 2: estadual;
-    - 3: municipal;
-    - 4: privada.
-
-    Uma escola é considerada pública quando pertence às
-    redes federal, estadual ou municipal.
+    Returns
+    -------
+    pandas.DataFrame
+        Base com indicadores binários derivados.
     """
-    feature_df = df.copy()
+    feature_df = dataframe.copy()
 
     feature_df["IS_FEDERAL"] = (
         feature_df["TP_DEPENDENCIA"] == 1
-    ).astype(int)
+    ).astype("int8")
 
     feature_df["IS_ESTADUAL"] = (
         feature_df["TP_DEPENDENCIA"] == 2
-    ).astype(int)
+    ).astype("int8")
 
     feature_df["IS_MUNICIPAL"] = (
         feature_df["TP_DEPENDENCIA"] == 3
-    ).astype(int)
+    ).astype("int8")
 
     feature_df["IS_PUBLICA"] = (
-        feature_df["TP_DEPENDENCIA"]
-        .isin([1, 2, 3])
-        .astype(int)
-    )
+        feature_df["TP_DEPENDENCIA"].isin(
+            [1, 2, 3]
+        )
+    ).astype("int8")
 
     feature_df["IS_RURAL"] = (
         feature_df["TP_LOCALIZACAO"] == 2
-    ).astype(int)
-
-    logger.info(
-        "Indicadores de rede e localização criados."
-    )
+    ).astype("int8")
 
     return feature_df
 
-
 def create_features(
-    df: pd.DataFrame,
+    dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
     """
     Executa todas as etapas de feature engineering do Censo.
 
     Parameters
     ----------
-    df:
-        Base escolar tratada.
+    dataframe:
+        Base escolar do Censo.
 
     Returns
     -------
-    pd.DataFrame
-        Base escolar com as novas features.
+    pandas.DataFrame
+        Base escolar com as features criadas.
     """
-    feature_df = create_infrastructure_score(df)
+    validate_feature_columns(dataframe)
+
+    feature_df = create_infrastructure_score(
+        dataframe
+    )
 
     feature_df = create_public_network_flags(
         feature_df
+    )
+
+    logger.info(
+        "Features escolares criadas: %s linhas.",
+        len(feature_df),
     )
 
     return feature_df

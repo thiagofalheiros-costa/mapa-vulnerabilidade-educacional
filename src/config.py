@@ -35,7 +35,7 @@ DOCS_DIR = PROJECT_ROOT / "docs"
 # ==========================================================
 
 CENSO_DIR = RAW_DIR / "censo_escolar"
-RENDIMENTO_DIR = RAW_DIR / "rendimento"
+RENDIMENTO_DIR = RAW_DIR / "rendimento" / "2024"
 DISTORCAO_DIR = RAW_DIR / "distorcao"
 INSE_DIR = RAW_DIR / "inse"
 IBGE_DIR = RAW_DIR / "ibge"
@@ -88,10 +88,33 @@ CENSO_DIR = RAW_DIR / "censo_escolar"
 REPORTS_DIR = PROJECT_DIR / "reports"
 TABLES_DIR = REPORTS_DIR / "tables"
 
-# Arquivo produzido na sprint anterior.
-CENSO_SCHOOLS_PARQUET = INTERIM_DIR / "censo_escolar_2024_escolas.parquet"
 
 # Base analítica municipal produzida na Sprint 4.
-MUNICIPALITY_FEATURES_PARQUET = (
+MUNICIPALITY_FEATURES_PATH = (
     PROCESSED_DIR / "municipios_features.parquet"
 )
+
+MUNICIPALITY_INDICATORS_PATH = (
+    PROCESSED_DIR / "municipality_indicators.parquet"
+)
+
+DISTORCAO_DIR = RAW_DIR / "distorcao" / "2024"
+RENDIMENTO_DIR = RAW_DIR / "rendimento" / "2024"
+INSE_DIR = RAW_DIR / "inse" / "2023"
+
+TDI_PATH = DISTORCAO_DIR / "TDI_MUNICIPIOS_2024.xlsx"
+
+RENDIMENTO_PATH = (
+    RENDIMENTO_DIR / "tx_rend_municipios_2024.xlsx"
+)
+
+INSE_PATH = INSE_DIR / "INSE_2023_municipios.xlsx"
+
+MUNICIPALITY_BASE_PATH = (
+    PROCESSED_DIR / "municipality_base.parquet"
+)
+
+CENSO_PROCESSED_PATH = (
+    PROCESSED_DIR / "censo_escolar_rs_2024.parquet"
+)
+

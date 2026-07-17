@@ -1,40 +1,94 @@
 """
 Agregação municipal do Censo Escolar.
+
+Este módulo agrega informações no nível da escola para o nível
+municipal, produzindo indicadores de infraestrutura, localização,
+dependência administrativa e matrículas.
 """
 
 import pandas as pd
 
 
-MUNICIPALITY_KEYS = [
+REQUIRED_COLUMNS = [
     "CO_MUNICIPIO",
     "NO_MUNICIPIO",
     "SG_UF",
+    "CO_ENTIDADE",
+    "QT_MAT_BAS",
+    "INFRA_SCORE",
+    "IS_RURAL",
+    "IS_ESTADUAL",
+    "IS_MUNICIPAL",
+    "IS_PUBLICA",
+    "IN_BIBLIOTECA",
+    "IN_LABORATORIO_INFORMATICA",
+    "IN_QUADRA_ESPORTES",
+    "IN_INTERNET",
+    "IN_BANDA_LARGA",
 ]
 
 
+def validate_columns(
+    dataframe: pd.DataFrame,
+) -> None:
+    """
+    Verifica se a base possui as colunas necessárias.
+
+    Parameters
+    ----------
+    dataframe:
+        Base escolar preparada para agregação.
+
+    Raises
+    ------
+    ValueError
+        Caso alguma coluna obrigatória não esteja disponível.
+    """
+    missing_columns = [
+        column
+        for column in REQUIRED_COLUMNS
+        if column not in dataframe.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            "A base do Censo não possui as colunas necessárias: "
+            f"{missing_columns}"
+        )
+
+
 def aggregate_by_municipality(
-    df: pd.DataFrame,
+    dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Agrega a base escolar no nível municipal.
+    Agrega os dados escolares no nível municipal.
 
-    Cada linha do resultado representa um município.
+    Os percentuais representam a proporção de escolas do município
+    que possuem determinada característica.
 
-    São calculados indicadores de:
+    Parameters
+    ----------
+    dataframe:
+        Base do Censo Escolar com uma linha por escola e variáveis
+        derivadas criadas.
 
-    - quantidade de escolas;
-    - quantidade de matrículas;
-    - média de matrículas por escola;
-    - infraestrutura escolar;
-    - localização;
-    - dependência administrativa;
-    - disponibilidade de equipamentos e serviços.
+    Returns
+    -------
+    pandas.DataFrame
+        Base agregada com uma linha por município.
     """
+    validate_columns(dataframe)
+
     municipality_df = (
-        df
+        dataframe
         .groupby(
-            MUNICIPALITY_KEYS,
+            [
+                "CO_MUNICIPIO",
+                "NO_MUNICIPIO",
+                "SG_UF",
+            ],
             as_index=False,
+            dropna=False,
         )
         .agg(
             NUM_ESCOLAS=(
@@ -43,9 +97,7 @@ def aggregate_by_municipality(
             ),
             NUM_MATRICULAS=(
                 "QT_MAT_BAS",
-                lambda series: series.sum(
-                    min_count=1
-                ),
+                lambda series: series.sum(min_count=1),
             ),
             INFRA_MEDIA=(
                 "INFRA_SCORE",
@@ -95,8 +147,7 @@ def aggregate_by_municipality(
         / municipality_df["NUM_ESCOLAS"]
     )
 
-    decimal_columns = [
-        "INFRA_MEDIA",
+    percentage_columns = [
         "PERC_RURAL",
         "PERC_PUBLICA",
         "PERC_ESTADUAL",
@@ -106,20 +157,35 @@ def aggregate_by_municipality(
         "PERC_QUADRA",
         "PERC_INTERNET",
         "PERC_BANDA_LARGA",
-        "MEDIA_MATRICULAS_ESCOLA",
     ]
 
-    municipality_df[decimal_columns] = (
-        municipality_df[decimal_columns]
+    municipality_df["INFRA_MEDIA"] = (
+        municipality_df["INFRA_MEDIA"]
         .round(3)
     )
 
-    municipality_df = municipality_df.sort_values(
-        by=[
-            "SG_UF",
-            "NO_MUNICIPIO",
-        ],
-        ignore_index=True,
+    municipality_df[percentage_columns] = (
+        municipality_df[percentage_columns]
+        .round(4)
+    )
+
+    municipality_df["MEDIA_MATRICULAS_ESCOLA"] = (
+        municipality_df["MEDIA_MATRICULAS_ESCOLA"]
+        .round(2)
+    )
+
+    municipality_df["CO_MUNICIPIO"] = (
+        pd.to_numeric(
+            municipality_df["CO_MUNICIPIO"],
+            errors="raise",
+        )
+        .astype("int64")
+    )
+
+    municipality_df = (
+        municipality_df
+        .sort_values("CO_MUNICIPIO")
+        .reset_index(drop=True)
     )
 
     return municipality_df
