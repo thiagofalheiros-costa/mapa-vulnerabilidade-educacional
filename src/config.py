@@ -38,8 +38,8 @@ CENSO_DIR = RAW_DIR / "censo_escolar"
 RENDIMENTO_DIR = RAW_DIR / "rendimento" / "2024"
 DISTORCAO_DIR = RAW_DIR / "distorcao"
 INSE_DIR = RAW_DIR / "inse"
-IBGE_DIR = RAW_DIR / "ibge"
-MALHA_DIR = RAW_DIR / "malha_municipal"
+IBGE_DIR = RAW_DIR / "ibge" / "2024"
+MALHA_DIR = RAW_DIR / "malha_municipal" / "2024"
 
 # ==========================================================
 # Configurações do projeto
@@ -89,7 +89,6 @@ REPORTS_DIR = PROJECT_DIR / "reports"
 TABLES_DIR = REPORTS_DIR / "tables"
 
 
-# Base analítica municipal produzida na Sprint 4.
 MUNICIPALITY_FEATURES_PATH = (
     PROCESSED_DIR / "municipios_features.parquet"
 )
@@ -118,3 +117,40 @@ CENSO_PROCESSED_PATH = (
     PROCESSED_DIR / "censo_escolar_rs_2024.parquet"
 )
 
+MUNICIPALITY_SHAPEFILE_PATH = (
+    MALHA_DIR
+    / "RS_Municipios_2024.shp"
+)
+
+# Base com o Índice de Vulnerabilidade Educacional
+MUNICIPALITY_FINAL_INDEX_PATH = (
+    PROCESSED_DIR
+    / "municipality_vulnerability.parquet"
+)
+
+# Arquivos geoespaciais processados
+MUNICIPALITY_GEODATA_PATH = (
+    PROCESSED_DIR
+    / "municipality_geodata.parquet"
+)
+
+# Mapas
+IVE_CONTINUOUS_MAP_PATH = (
+    MAPS_DIR
+    / "ive_municipios_rs_continuo.png"
+)
+
+IVE_CATEGORY_MAP_PATH = (
+    MAPS_DIR
+    / "ive_municipios_rs_categorias.png"
+)
+
+IVE_PRIORITY_MAP_PATH = (
+    MAPS_DIR
+    / "ive_municipios_rs_prioritarios.png"
+)
+
+IVE_INTERACTIVE_MAP_PATH = (
+    MAPS_DIR
+    / "ive_municipios_rs_interativo.html"
+)
