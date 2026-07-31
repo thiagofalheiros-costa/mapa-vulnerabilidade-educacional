@@ -51,14 +51,6 @@ def identify_category_column(df: pd.DataFrame) -> str | None:
     return None
 
 
-def identify_region_column(df: pd.DataFrame) -> str | None:
-    """Identifica a melhor coluna territorial disponível."""
-    for column in ["NM_RGI", "NM_RGINT", "NM_REGIA", "NM_REGIAO", "REGIAO"]:
-        if column in df.columns:
-            return column
-    return None
-
-
 def identify_infrastructure_column(df: pd.DataFrame) -> str | None:
     """Identifica a coluna de infraestrutura disponível."""
     for column in ["INFRA_MEDIA", "INFRAESTRUTURA_MEDIA", "INDICE_INFRAESTRUTURA"]:
@@ -85,8 +77,17 @@ def apply_default_layout(
         font={"family": "Arial", "color": "#1F2937"},
         hoverlabel={"font": {"family": "Arial"}},
     )
-    figure.update_xaxes(showgrid=False, zeroline=False, linecolor="#DCE3EA")
-    figure.update_yaxes(showgrid=True, gridcolor="#DCE3EA", zeroline=False, linecolor="#DCE3EA")
+    figure.update_xaxes(
+        showgrid=False,
+        zeroline=False,
+        linecolor="#DCE3EA",
+    )
+    figure.update_yaxes(
+        showgrid=True,
+        gridcolor="#DCE3EA",
+        zeroline=False,
+        linecolor="#DCE3EA",
+    )
     return figure
 
 
@@ -111,6 +112,12 @@ def render_ive_distribution(df: pd.DataFrame) -> None:
         .reset_index(name="Municípios")
     )
 
+    distribution_df = (
+        distribution_df.loc[distribution_df["Municípios"] > 0]
+        .sort_values("Municípios", ascending=False)
+        .reset_index(drop=True)
+    )
+
     total = int(distribution_df["Municípios"].sum())
     if total == 0:
         st.info("Não existem dados suficientes para o gráfico de distribuição do IVE.")
@@ -121,26 +128,23 @@ def render_ive_distribution(df: pd.DataFrame) -> None:
     distribution_df["_PERCENTUAL_TOOLTIP"] = distribution_df["Percentual"].apply(
         lambda value: f"{value:.1f}%".replace(".", ",")
     )
-    distribution_df["_ROTULO"] = (
-        distribution_df["_MUNICIPIOS_TOOLTIP"]
-        + "<br>"
-        + distribution_df["_PERCENTUAL_TOOLTIP"]
-    )
+
+    category_order = distribution_df["Categoria IVE"].tolist()
 
     figure = px.bar(
         distribution_df,
         x="Categoria IVE",
         y="Municípios",
         color="Categoria IVE",
-        category_orders={"Categoria IVE": CATEGORY_ORDER},
+        category_orders={"Categoria IVE": category_order},
         color_discrete_map=CATEGORY_COLORS,
-        text="_ROTULO",
         custom_data=["_MUNICIPIOS_TOOLTIP", "_PERCENTUAL_TOOLTIP"],
     )
 
     figure.update_traces(
-        textposition="outside",
-        cliponaxis=False,
+        text=None,
+        texttemplate=None,
+        textposition="none",
         marker_line_width=0,
         hovertemplate=(
             "<b>%{x}</b><br><br>"
@@ -156,62 +160,12 @@ def render_ive_distribution(df: pd.DataFrame) -> None:
         xaxis_title="Categoria do IVE",
         yaxis_title="Quantidade de municípios",
     )
-    figure.update_layout(showlegend=False, uniformtext_minsize=10, uniformtext_mode="hide")
-    figure.update_xaxes(categoryorder="array", categoryarray=CATEGORY_ORDER)
-    figure.update_yaxes(rangemode="tozero", tickformat=",.0f")
-
-    st.plotly_chart(figure, width="stretch", config={"displayModeBar": False})
-
-
-def render_ive_by_region(df: pd.DataFrame) -> None:
-    """Renderiza o IVE médio por região geográfica."""
-    region_column = identify_region_column(df)
-
-    if region_column is None:
-        st.info(
-            "O gráfico regional não está disponível porque "
-            "a base não possui uma coluna territorial compatível."
-        )
-        return
-
-    region_df = df.dropna(subset=[region_column, "IVE"]).copy()
-    if region_df.empty:
-        st.info("Não existem dados suficientes para a análise regional.")
-        return
-
-    region_summary = (
-        region_df.groupby(region_column, as_index=False, observed=True)
-        .agg(IVE_MEDIO=("IVE", "mean"), MUNICIPIOS=("IVE", "size"))
-        .sort_values("IVE_MEDIO", ascending=True)
-    )
-    region_summary["_IVE_TOOLTIP"] = region_summary["IVE_MEDIO"].apply(format_decimal_br)
-    region_summary["_MUNICIPIOS_TOOLTIP"] = region_summary["MUNICIPIOS"].apply(format_integer_br)
-
-    figure = px.bar(
-        region_summary,
-        x="IVE_MEDIO",
-        y=region_column,
-        orientation="h",
-        custom_data=["_IVE_TOOLTIP", "_MUNICIPIOS_TOOLTIP"],
-    )
-    figure.update_traces(
-        marker_color="#2F75B5",
-        marker_line_width=0,
-        hovertemplate=(
-            "<b>%{y}</b><br><br>"
-            "IVE médio: %{customdata[0]}<br>"
-            "Municípios: %{customdata[1]}"
-            "<extra></extra>"
-        ),
-    )
-    figure = apply_default_layout(
-        figure=figure,
-        title="IVE médio por região",
-        xaxis_title="IVE médio",
-        yaxis_title="Região",
-    )
-    figure.update_xaxes(tickformat=".3f")
     figure.update_layout(showlegend=False)
+    figure.update_xaxes(
+        categoryorder="array",
+        categoryarray=category_order,
+    )
+    figure.update_yaxes(rangemode="tozero", tickformat=",.0f")
 
     st.plotly_chart(figure, width="stretch", config={"displayModeBar": False})
 
@@ -268,7 +222,6 @@ def render_infrastructure_scatter(df: pd.DataFrame) -> None:
             "_INFRA_TOOLTIP",
             "_MATRICULAS_TOOLTIP",
         ],
-        trendline="ols",
     )
 
     figure.update_traces(
@@ -290,11 +243,6 @@ def render_infrastructure_scatter(df: pd.DataFrame) -> None:
         ),
         selector={"mode": "markers"},
     )
-    figure.update_traces(
-        line={"color": "#667085", "width": 2, "dash": "dash"},
-        hoverinfo="skip",
-        selector={"mode": "lines"},
-    )
 
     figure = apply_default_layout(
         figure=figure,
@@ -302,8 +250,278 @@ def render_infrastructure_scatter(df: pd.DataFrame) -> None:
         xaxis_title="Infraestrutura média",
         yaxis_title="IVE",
     )
-    figure.update_xaxes(tickformat=".3f")
-    figure.update_yaxes(tickformat=".3f")
+    x_min = float(scatter_df[infrastructure_column].min())
+    x_max = float(scatter_df[infrastructure_column].max())
+    y_min = float(scatter_df["IVE"].min())
+    y_max = float(scatter_df["IVE"].max())
+
+    x_tick_values = [
+        x_min + (x_max - x_min) * index / 5
+        for index in range(6)
+    ]
+    y_tick_values = [
+        y_min + (y_max - y_min) * index / 5
+        for index in range(6)
+    ]
+
+    figure.update_xaxes(
+        tickmode="array",
+        tickvals=x_tick_values,
+        ticktext=[format_decimal_br(value, decimal_places=2) for value in x_tick_values],
+    )
+    figure.update_yaxes(
+        tickmode="array",
+        tickvals=y_tick_values,
+        ticktext=[format_decimal_br(value, decimal_places=2) for value in y_tick_values],
+    )
     figure.update_layout(legend_title_text="Categoria IVE")
 
     st.plotly_chart(figure, width="stretch", config={"displayModeBar": False})
+
+
+
+def classify_correlation_strength(value: float) -> str:
+    """Classifica a intensidade de uma correlação pelo valor absoluto."""
+    absolute_value = abs(value)
+
+    if absolute_value >= 0.70:
+        return "forte"
+    if absolute_value >= 0.40:
+        return "moderada"
+    return "fraca"
+
+
+def generate_correlation_insights(
+    correlation_matrix: pd.DataFrame,
+    indicator_labels: dict[str, str],
+) -> str:
+    """Gera uma leitura automática das correlações exibidas."""
+    general_pairs: list[tuple[str, str, float]] = []
+    columns = correlation_matrix.columns.tolist()
+
+    for first_index, first_column in enumerate(columns):
+        for second_column in columns[first_index + 1:]:
+            value = correlation_matrix.loc[first_column, second_column]
+
+            if pd.isna(value):
+                continue
+
+            # As relações com o IVE são tratadas separadamente para
+            # evitar repetição na síntese.
+            if "IVE" not in (first_column, second_column):
+                general_pairs.append(
+                    (
+                        indicator_labels[first_column],
+                        indicator_labels[second_column],
+                        float(value),
+                    )
+                )
+
+    sentences: list[str] = []
+
+    if "IVE" in correlation_matrix.columns:
+        ive_correlations = (
+            correlation_matrix["IVE"]
+            .drop(labels=["IVE"], errors="ignore")
+            .dropna()
+            .sort_values(
+                key=lambda series: series.abs(),
+                ascending=False,
+            )
+        )
+
+        for column, value in ive_correlations.head(2).items():
+            direction = "positiva" if value > 0 else "negativa"
+            strength = classify_correlation_strength(float(value))
+
+            sentences.append(
+                f"O IVE apresenta correlação {strength} e {direction} "
+                f"com {indicator_labels[column].lower()} "
+                f"(r = {format_decimal_br(value, decimal_places=2)})."
+            )
+
+    general_pairs.sort(
+        key=lambda item: abs(item[2]),
+        reverse=True,
+    )
+
+    if general_pairs:
+        first_label, second_label, value = general_pairs[0]
+        direction = "positiva" if value > 0 else "negativa"
+        strength = classify_correlation_strength(value)
+
+        sentences.append(
+            f"Entre os demais indicadores, a associação mais intensa "
+            f"ocorre entre {first_label.lower()} e "
+            f"{second_label.lower()}: correlação {strength} e "
+            f"{direction} "
+            f"(r = {format_decimal_br(value, decimal_places=2)})."
+        )
+
+    if not sentences:
+        return (
+            "Não há pares de indicadores com dados suficientes para "
+            "produzir uma leitura das correlações."
+        )
+
+    sentences.append(
+        "As correlações representam associações lineares e não devem "
+        "ser interpretadas como evidência de causalidade."
+    )
+
+    return " ".join(sentences)
+
+
+def render_correlation_heatmap(df: pd.DataFrame) -> None:
+    """Renderiza o heatmap de correlação entre os indicadores educacionais."""
+    indicator_labels = {
+        "IVE": "IVE",
+        "INFRA_MEDIA": "Infraestrutura",
+        "MEDIA_INSE": "INSE",
+        "ABANDONO_EM": "Abandono",
+        "REPROVACAO_EM": "Reprovação",
+        "DISTORCAO_EM": "Distorção idade-série",
+        "MEDIA_MATRICULAS_ESCOLA": "Matrículas por escola",
+    }
+
+    available_columns = [
+        column
+        for column in indicator_labels
+        if column in df.columns
+    ]
+
+    if len(available_columns) < 2:
+        st.info(
+            "O heatmap de correlação não está disponível porque "
+            "a base possui menos de dois indicadores compatíveis."
+        )
+        return
+
+    correlation_df = (
+        df[available_columns]
+        .apply(pd.to_numeric, errors="coerce")
+        .dropna(axis=1, how="all")
+    )
+
+    valid_columns = [
+        column
+        for column in correlation_df.columns
+        if correlation_df[column].nunique(dropna=True) > 1
+    ]
+    correlation_df = correlation_df[valid_columns]
+
+    if correlation_df.shape[1] < 2:
+        st.info(
+            "Não existem indicadores numéricos com variação suficiente "
+            "para calcular a matriz de correlação."
+        )
+        return
+
+    correlation_matrix = correlation_df.corr(
+        method="pearson",
+        min_periods=3,
+    )
+
+    display_labels = [
+        indicator_labels[column]
+        for column in correlation_matrix.columns
+    ]
+
+    formatted_values = correlation_matrix.map(
+        lambda value: format_decimal_br(
+            value,
+            decimal_places=2,
+        )
+    )
+
+    figure = go.Figure(
+        data=go.Heatmap(
+            z=correlation_matrix.to_numpy(),
+            x=display_labels,
+            y=display_labels,
+            zmin=-1,
+            zmax=1,
+            zmid=0,
+            colorscale="RdBu_r",
+            colorbar={
+                "title": {
+                    "text": "Correlação",
+                    "side": "right",
+                },
+                "tickvals": [-1, -0.5, 0, 0.5, 1],
+                "ticktext": [
+                    "-1,00",
+                    "-0,50",
+                    "0,00",
+                    "0,50",
+                    "1,00",
+                ],
+                "thickness": 16,
+            },
+            text=formatted_values.to_numpy(),
+            texttemplate="%{text}",
+            textfont={"size": 12},
+            customdata=formatted_values.to_numpy(),
+            hovertemplate=(
+                "<b>%{y} × %{x}</b><br><br>"
+                "Correlação de Pearson: %{customdata}"
+                "<extra></extra>"
+            ),
+            xgap=1,
+            ygap=1,
+        )
+    )
+
+    figure.update_layout(
+        title={
+            "text": "Correlação entre os indicadores educacionais",
+            "x": 0.02,
+            "xanchor": "left",
+        },
+        margin={
+            "l": 140,
+            "r": 40,
+            "t": 80,
+            "b": 120,
+        },
+        height=620,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font={
+            "family": "Arial",
+            "color": "#1F2937",
+        },
+        hoverlabel={
+            "font": {
+                "family": "Arial",
+            }
+        },
+    )
+
+    figure.update_xaxes(
+        title=None,
+        side="bottom",
+        tickangle=-35,
+        showgrid=False,
+        zeroline=False,
+    )
+    figure.update_yaxes(
+        title=None,
+        autorange="reversed",
+        showgrid=False,
+        zeroline=False,
+    )
+
+    st.plotly_chart(
+        figure,
+        width="stretch",
+        config={"displayModeBar": False},
+    )
+
+    st.markdown("#### Principais percepções")
+    st.info(
+        generate_correlation_insights(
+            correlation_matrix=correlation_matrix,
+            indicator_labels=indicator_labels,
+        )
+    )

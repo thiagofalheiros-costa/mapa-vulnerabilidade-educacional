@@ -9,6 +9,7 @@ from typing import Final
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+from html import escape
 
 
 PRIMARY_COLOR: Final[str] = "#17365D"
@@ -433,6 +434,113 @@ def identify_main_dimension(
 
     return main_indicator["label"]
 
+INDICATOR_TOOLTIPS: Final[dict[str, str]] = {
+    "INSE médio": (
+        "Indicador de Nível Socioeconômico médio dos estudantes. "
+        "Valores mais elevados representam, em geral, contextos "
+        "socioeconômicos mais favoráveis."
+    ),
+    "Infraestrutura média": (
+        "Média municipal dos indicadores de infraestrutura das escolas, "
+        "considerando recursos como biblioteca, laboratório de informática, "
+        "quadra, internet e banda larga. Valores maiores indicam melhor "
+        "disponibilidade média de infraestrutura."
+    ),
+}
+
+
+def render_comparison_table(comparison_table: pd.DataFrame) -> None:
+    """Renderiza a comparação municipal com tooltips por indicador."""
+    rows_html: list[str] = []
+
+    for _, row in comparison_table.iterrows():
+        indicator = str(row["Indicador"])
+        municipality_value = str(row["Município"])
+        state_value = str(row["Média estadual"])
+
+        tooltip = INDICATOR_TOOLTIPS.get(indicator)
+
+        if tooltip:
+            indicator_html = (
+                f'<span class="indicator-tooltip" title="{escape(tooltip)}">'
+                f"{escape(indicator)} ⓘ"
+                "</span>"
+            )
+        else:
+            indicator_html = escape(indicator)
+
+        rows_html.append(
+            "<tr>"
+            f"<td>{indicator_html}</td>"
+            f"<td>{escape(municipality_value)}</td>"
+            f"<td>{escape(state_value)}</td>"
+            "</tr>"
+        )
+
+    table_html = (
+        """
+        <style>
+            .comparison-table {
+                width: 100%;
+                border-collapse: collapse;
+                background-color: #FFFFFF;
+                border: 1px solid #DCE3EA;
+                border-radius: 12px;
+                overflow: hidden;
+                font-family: Arial, sans-serif;
+                color: #1F2937;
+                font-size: 0.88rem;
+            }
+
+            .comparison-table th {
+                background-color: #F5F7FA;
+                color: #17365D;
+                font-weight: 600;
+                text-align: center;
+                padding: 0.7rem 0.6rem;
+                border-bottom: 1px solid #DCE3EA;
+            }
+
+            .comparison-table td {
+                padding: 0.65rem 0.6rem;
+                border-bottom: 1px solid #E8EDF2;
+                text-align: center;
+            }
+
+            .comparison-table td:first-child {
+                text-align: left;
+                font-weight: 500;
+            }
+
+            .comparison-table tr:last-child td {
+                border-bottom: none;
+            }
+
+            .indicator-tooltip {
+                cursor: help;
+                text-decoration: none;
+            }
+        </style>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Indicador</th>
+                    <th>Município</th>
+                    <th>Média estadual</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        + "".join(rows_html)
+        + """
+            </tbody>
+        </table>
+        """
+    )
+
+    st.markdown(table_html, unsafe_allow_html=True)
+
 def render_municipality_profile(
     filtered_df: pd.DataFrame,
     complete_df: pd.DataFrame,
@@ -527,18 +635,7 @@ def render_municipality_profile(
             complete_df=complete_df,
         )
 
-        st.dataframe(
-            comparison_table,
-            width="stretch",
-            hide_index=True,
-            column_config={
-                "Indicador": st.column_config.TextColumn("Indicador"),
-                "Município": st.column_config.TextColumn("Município"),
-                "Média estadual": st.column_config.TextColumn(
-                    "Média estadual"
-                ),
-            },
-        )
+        render_comparison_table(comparison_table)
 
         st.markdown("#### Principais percepções")
         st.info(

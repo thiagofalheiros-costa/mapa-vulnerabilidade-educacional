@@ -9,7 +9,7 @@ import streamlit as st
 
 from components.charts import (
     render_infrastructure_scatter,
-    render_ive_by_region,
+    render_correlation_heatmap,
     render_ive_distribution,
 )
 from components.data_loader import load_dashboard_data
@@ -653,6 +653,16 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
+    render_municipality_profile(
+    filtered_df=filtered_df,
+    complete_df=complete_df,
+    )
+
+    st.markdown(
+    "<br>",
+    unsafe_allow_html=True,
+    )
+
     st.subheader("Distribuição territorial da vulnerabilidade")
 
     st.caption(
@@ -662,16 +672,6 @@ def main() -> None:
     )
 
     render_ive_map(filtered_df)
-
-    st.markdown(
-        "<br>",
-        unsafe_allow_html=True,
-    )
-
-    render_municipality_profile(
-        filtered_df=filtered_df,
-        complete_df=complete_df,
-    )
 
     st.markdown(
         "<br>",
@@ -714,7 +714,7 @@ def main() -> None:
         render_ive_distribution(filtered_df)
 
     with chart_col2:
-        render_ive_by_region(filtered_df)
+        render_correlation_heatmap(filtered_df)
 
     st.markdown(
         "<br>",

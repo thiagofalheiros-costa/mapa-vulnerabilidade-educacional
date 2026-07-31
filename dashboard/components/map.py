@@ -322,13 +322,21 @@ def create_colormap(
         minimum_ive -= 0.001
         maximum_ive += 0.001
 
+    # Paleta ColorBrewer RdYlGn_r:
+    # valores baixos do IVE em verde e valores altos em vermelho.
     colormap = cm.LinearColormap(
         colors=[
-            "#ffffcc",
-            "#fed976",
-            "#fd8d3c",
-            "#e31a1c",
-            "#800026",
+            "#006837",
+            "#1A9850",
+            "#66BD63",
+            "#A6D96A",
+            "#D9EF8B",
+            "#FFFFBF",
+            "#FEE08B",
+            "#FDAE61",
+            "#F46D43",
+            "#D73027",
+            "#A50026",
         ],
         vmin=minimum_ive,
         vmax=maximum_ive,
@@ -474,7 +482,46 @@ def create_ive_map(
         tooltip=create_tooltip(formatted_data),
         zoom_on_click=False,
         smooth_factor=1,
+        show=True,
     ).add_to(municipality_map)
+
+    # Camada adicional com os 50 municípios prioritários.
+    priority_data = formatted_data.loc[
+        pd.to_numeric(
+            formatted_data["IVE_RANK"],
+            errors="coerce",
+        ).le(50)
+    ].copy()
+
+    if not priority_data.empty:
+        priority_group = folium.FeatureGroup(
+            name="Municípios prioritários — Top 50",
+            overlay=True,
+            control=True,
+            show=False,
+        )
+
+        folium.GeoJson(
+            data=priority_data.to_json(),
+            name="Top 50",
+            style_function=lambda _: {
+                "fillColor": "#E63228",
+                "color": "#FFFFFF",
+                "weight": 1.0,
+                "fillOpacity": 0.9,
+            },
+            highlight_function=lambda _: {
+                "fillColor": "#B71C1C",
+                "color": "#17365D",
+                "weight": 2.5,
+                "fillOpacity": 1.0,
+            },
+            tooltip=create_tooltip(priority_data),
+            zoom_on_click=False,
+            smooth_factor=1,
+        ).add_to(priority_group)
+
+        priority_group.add_to(municipality_map)
 
     colormap.add_to(municipality_map)
 
@@ -489,7 +536,8 @@ def create_ive_map(
     )
 
     folium.LayerControl(
-        collapsed=True
+        collapsed=False,
+        position="topright",
     ).add_to(municipality_map)
 
     return municipality_map
