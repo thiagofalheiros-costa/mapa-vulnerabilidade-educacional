@@ -5,16 +5,23 @@ Componente de diagnóstico municipal do dashboard.
 from __future__ import annotations
 
 from typing import Final
+import logging
 
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from html import escape
 
+from components.municipality_insights import (
+    generate_municipality_insight,
+)
+
 
 PRIMARY_COLOR: Final[str] = "#17365D"
 SECONDARY_COLOR: Final[str] = "#2F75B5"
 STATE_COLOR: Final[str] = "#AAB7C4"
+
+logger = logging.getLogger(__name__)
 
 CATEGORY_COLUMNS: Final[tuple[str, ...]] = (
     "IVE_CATEGORIA_RELATIVA",
@@ -311,103 +318,6 @@ def create_radar_chart(
     return figure
 
 
-def compare_indicator(
-    municipality_value: float,
-    state_value: float,
-    direction: str,
-    tolerance: float = 0.03,
-) -> str:
-    """Classifica a posição do município em relação à média estadual."""
-    if pd.isna(municipality_value) or pd.isna(state_value):
-        return "indisponível"
-
-    scale = abs(state_value) if state_value != 0 else 1.0
-    relative_difference = (municipality_value - state_value) / scale
-
-    if abs(relative_difference) <= tolerance:
-        return "similar"
-
-    if direction == "higher_worse":
-        return "worse" if municipality_value > state_value else "better"
-
-    return "worse" if municipality_value < state_value else "better"
-
-
-def generate_interpretation(
-    municipality: pd.Series,
-    complete_df: pd.DataFrame,
-) -> str:
-    """Gera uma síntese automática baseada em regras transparentes."""
-    municipality_ive = pd.to_numeric(
-        pd.Series([municipality.get("IVE")]),
-        errors="coerce",
-    ).iloc[0]
-    state_ive = pd.to_numeric(
-        complete_df["IVE"],
-        errors="coerce",
-    ).mean()
-
-    if municipality_ive > state_ive * 1.03:
-        opening = "apresenta IVE superior à média estadual"
-    elif municipality_ive < state_ive * 0.97:
-        opening = "apresenta IVE inferior à média estadual"
-    else:
-        opening = "apresenta IVE próximo à média estadual"
-
-    worse_labels: list[str] = []
-    better_labels: list[str] = []
-
-    for indicator in PROFILE_INDICATORS:
-        column = indicator["raw"]
-
-        if column not in complete_df.columns:
-            continue
-
-        municipality_value = pd.to_numeric(
-            pd.Series([municipality.get(column)]),
-            errors="coerce",
-        ).iloc[0]
-        state_value = pd.to_numeric(
-            complete_df[column],
-            errors="coerce",
-        ).mean()
-
-        comparison = compare_indicator(
-            municipality_value=municipality_value,
-            state_value=state_value,
-            direction=indicator["direction"],
-        )
-
-        if comparison == "worse":
-            worse_labels.append(indicator["label"].lower())
-        elif comparison == "better":
-            better_labels.append(indicator["label"].lower())
-
-    sentences = [
-        f"{municipality['NO_MUNICIPIO']} {opening}."
-    ]
-
-    if worse_labels:
-        highlighted = ", ".join(worse_labels[:3])
-        sentences.append(
-            "As dimensões que mais exigem atenção, em comparação "
-            f"com o padrão estadual, são: {highlighted}."
-        )
-
-    if better_labels:
-        highlighted = ", ".join(better_labels[:2])
-        sentences.append(
-            "Como aspectos relativamente favoráveis, destacam-se: "
-            f"{highlighted}."
-        )
-
-    if not worse_labels and not better_labels:
-        sentences.append(
-            "Os indicadores disponíveis permanecem próximos das "
-            "médias observadas no estado."
-        )
-
-    return " ".join(sentences)
 
 def identify_main_dimension(
     municipality: pd.Series,
@@ -541,6 +451,114 @@ def render_comparison_table(comparison_table: pd.DataFrame) -> None:
 
     st.markdown(table_html, unsafe_allow_html=True)
 
+def build_municipality_insight_payload(
+    municipality: pd.Series,
+    category_column: str | None,
+) -> dict[str, object]:
+    """
+    Prepara os indicadores do município para a análise com IA.
+    """
+    category_value = (
+        municipality.get(category_column)
+        if category_column is not None
+        else "Não disponível"
+    )
+
+    return {
+        "NO_MUNICIPIO": municipality.get("NO_MUNICIPIO"),
+        "IVE": municipality.get("IVE"),
+        "IVE_CATEGORIA": category_value,
+        "RANK_VULNERABILIDADE": municipality.get("IVE_RANK"),
+        "INFRA_MEDIA": municipality.get("INFRA_MEDIA"),
+        "MEDIA_INSE": municipality.get("MEDIA_INSE"),
+        "ABANDONO_EM": municipality.get("ABANDONO_EM"),
+        "REPROVACAO_EM": municipality.get("REPROVACAO_EM"),
+        "APROVACAO_EM": municipality.get("APROVACAO_EM"),
+        "DISTORCAO_EM": municipality.get("DISTORCAO_EM"),
+        "NUM_ESCOLAS": municipality.get("NUM_ESCOLAS"),
+        "NUM_MATRICULAS": municipality.get("NUM_MATRICULAS"),
+    }
+
+
+
+def render_ai_insight(
+    municipality: pd.Series,
+    category_column: str | None,
+) -> None:
+    """
+    Renderiza a análise inteligente do município selecionado.
+    """
+    municipality_name = str(municipality["NO_MUNICIPIO"])
+    municipality_code = str(municipality["CO_MUNICIPIO"])
+
+    state_key = "municipality_ai_insight"
+    municipality_key = "municipality_ai_code"
+
+    if state_key not in st.session_state:
+        st.session_state[state_key] = None
+
+    if municipality_key not in st.session_state:
+        st.session_state[municipality_key] = None
+
+    if st.session_state[municipality_key] != municipality_code:
+        st.session_state[state_key] = None
+        st.session_state[municipality_key] = municipality_code
+
+    st.markdown("#### ✨ Análise Inteligente")
+
+    st.caption(
+        "🤖 Conteúdo gerado automaticamente por IA "
+        "com base nos indicadores do município selecionado."
+    )
+
+    generate_button = st.button(
+        "✨ Gerar análise com IA",
+        type="primary",
+        key=f"generate_ai_insight_{municipality_code}",
+        width="stretch",
+    )
+
+    if generate_button:
+        payload = build_municipality_insight_payload(
+            municipality=municipality,
+            category_column=category_column,
+        )
+
+        try:
+            with st.spinner(
+                f"Analisando os indicadores de {municipality_name}..."
+            ):
+                st.session_state[state_key] = (
+                    generate_municipality_insight(payload)
+                )
+
+        except ValueError as error:
+            st.error(str(error))
+
+        except Exception:
+            logger.exception(
+                "Erro ao gerar análise inteligente de %s.",
+                municipality_name,
+            )
+
+            st.warning(
+                "Não foi possível gerar a análise automática neste momento."
+            )
+
+    if st.session_state[state_key]:
+        with st.expander(
+            "📄 Mostrar análise",
+            expanded=True,
+        ):
+            st.markdown(st.session_state[state_key])
+
+    else:
+        st.info(
+            "Clique no botão acima para gerar uma leitura automática "
+            "dos indicadores do município selecionado."
+        )
+
+
 def render_municipality_profile(
     filtered_df: pd.DataFrame,
     complete_df: pd.DataFrame,
@@ -637,10 +655,7 @@ def render_municipality_profile(
 
         render_comparison_table(comparison_table)
 
-        st.markdown("#### Principais percepções")
-        st.info(
-            generate_interpretation(
-                municipality=municipality,
-                complete_df=complete_df,
-            )
+        render_ai_insight(
+            municipality=municipality,
+            category_column=category_column,
         )

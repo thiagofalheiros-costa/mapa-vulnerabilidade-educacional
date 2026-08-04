@@ -9,6 +9,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+from components.chart_insights import (
+    render_ai_analysis,
+    generate_overview_insight,
+)
+
 
 CATEGORY_ORDER = [
     "Muito baixa",
@@ -168,6 +173,7 @@ def render_ive_distribution(df: pd.DataFrame) -> None:
     figure.update_yaxes(rangemode="tozero", tickformat=",.0f")
 
     st.plotly_chart(figure, width="stretch", config={"displayModeBar": False})
+   
 
 
 def render_infrastructure_scatter(df: pd.DataFrame) -> None:
@@ -278,98 +284,6 @@ def render_infrastructure_scatter(df: pd.DataFrame) -> None:
 
     st.plotly_chart(figure, width="stretch", config={"displayModeBar": False})
 
-
-
-def classify_correlation_strength(value: float) -> str:
-    """Classifica a intensidade de uma correlação pelo valor absoluto."""
-    absolute_value = abs(value)
-
-    if absolute_value >= 0.70:
-        return "forte"
-    if absolute_value >= 0.40:
-        return "moderada"
-    return "fraca"
-
-
-def generate_correlation_insights(
-    correlation_matrix: pd.DataFrame,
-    indicator_labels: dict[str, str],
-) -> str:
-    """Gera uma leitura automática das correlações exibidas."""
-    general_pairs: list[tuple[str, str, float]] = []
-    columns = correlation_matrix.columns.tolist()
-
-    for first_index, first_column in enumerate(columns):
-        for second_column in columns[first_index + 1:]:
-            value = correlation_matrix.loc[first_column, second_column]
-
-            if pd.isna(value):
-                continue
-
-            # As relações com o IVE são tratadas separadamente para
-            # evitar repetição na síntese.
-            if "IVE" not in (first_column, second_column):
-                general_pairs.append(
-                    (
-                        indicator_labels[first_column],
-                        indicator_labels[second_column],
-                        float(value),
-                    )
-                )
-
-    sentences: list[str] = []
-
-    if "IVE" in correlation_matrix.columns:
-        ive_correlations = (
-            correlation_matrix["IVE"]
-            .drop(labels=["IVE"], errors="ignore")
-            .dropna()
-            .sort_values(
-                key=lambda series: series.abs(),
-                ascending=False,
-            )
-        )
-
-        for column, value in ive_correlations.head(2).items():
-            direction = "positiva" if value > 0 else "negativa"
-            strength = classify_correlation_strength(float(value))
-
-            sentences.append(
-                f"O IVE apresenta correlação {strength} e {direction} "
-                f"com {indicator_labels[column].lower()} "
-                f"(r = {format_decimal_br(value, decimal_places=2)})."
-            )
-
-    general_pairs.sort(
-        key=lambda item: abs(item[2]),
-        reverse=True,
-    )
-
-    if general_pairs:
-        first_label, second_label, value = general_pairs[0]
-        direction = "positiva" if value > 0 else "negativa"
-        strength = classify_correlation_strength(value)
-
-        sentences.append(
-            f"Entre os demais indicadores, a associação mais intensa "
-            f"ocorre entre {first_label.lower()} e "
-            f"{second_label.lower()}: correlação {strength} e "
-            f"{direction} "
-            f"(r = {format_decimal_br(value, decimal_places=2)})."
-        )
-
-    if not sentences:
-        return (
-            "Não há pares de indicadores com dados suficientes para "
-            "produzir uma leitura das correlações."
-        )
-
-    sentences.append(
-        "As correlações representam associações lineares e não devem "
-        "ser interpretadas como evidência de causalidade."
-    )
-
-    return " ".join(sentences)
 
 
 def render_correlation_heatmap(df: pd.DataFrame) -> None:
@@ -518,10 +432,142 @@ def render_correlation_heatmap(df: pd.DataFrame) -> None:
         config={"displayModeBar": False},
     )
 
-    st.markdown("#### Principais percepções")
-    st.info(
-        generate_correlation_insights(
-            correlation_matrix=correlation_matrix,
-            indicator_labels=indicator_labels,
+
+def render_overview_ai(
+    df: pd.DataFrame,
+) -> None:
+    """
+    Renderiza a análise integrada da aba Visão Geral.
+    """
+
+    # ============================
+    # Distribuição do IVE
+    # ============================
+
+    category_column = identify_category_column(df)
+
+    distribution_df = (
+        df[category_column]
+        .dropna()
+        .astype(str)
+        .value_counts()
+        .rename_axis("Categoria")
+        .reset_index(name="Municípios")
+    )
+
+    total = distribution_df["Municípios"].sum()
+
+    distribution_df["Percentual"] = (
+        distribution_df["Municípios"] / total * 100
+    )
+
+    distribution_summary = distribution_df.to_string(
+        index=False
+    )
+
+    # ============================
+    # Scatter
+    # ============================
+
+    infrastructure_column = identify_infrastructure_column(df)
+
+    scatter_df = df.dropna(
+        subset=[
+            infrastructure_column,
+            "IVE",
+        ]
+    )
+
+    scatter_summary = {
+        "correlation": round(
+            scatter_df[infrastructure_column].corr(
+                scatter_df["IVE"]
+            ),
+            3,
+        ),
+        "ive_min": round(
+            scatter_df["IVE"].min(),
+            3,
+        ),
+        "ive_max": round(
+            scatter_df["IVE"].max(),
+            3,
+        ),
+        "infra_min": round(
+            scatter_df[infrastructure_column].min(),
+            3,
+        ),
+        "infra_max": round(
+            scatter_df[infrastructure_column].max(),
+            3,
+        ),
+        "municipalities": len(scatter_df),
+    }
+
+    scatter_summary = "\n".join(
+        [
+            f"{key}: {value}"
+            for key, value in scatter_summary.items()
+        ]
+    )
+
+    # ============================
+    # Correlação
+    # ============================
+
+    correlation_columns = [
+        "IVE",
+        "INFRA_MEDIA",
+        "MEDIA_INSE",
+        "ABANDONO_EM",
+        "REPROVACAO_EM",
+        "DISTORCAO_EM",
+    ]
+
+    available = [
+        column
+        for column in correlation_columns
+        if column in df.columns
+    ]
+
+    correlation_matrix = (
+        df[available]
+        .corr(numeric_only=True)
+    )
+
+    ive_corr = (
+        correlation_matrix["IVE"]
+        .drop("IVE")
+        .sort_values(
+            key=lambda x: x.abs(),
+            ascending=False,
         )
+    )
+
+    correlation_summary = "\n".join(
+        [
+            f"{index}: {value:.3f}"
+            for index, value in ive_corr.items()
+        ]
+    )
+
+    # ============================
+    # IA
+    # ============================
+
+    render_ai_analysis(
+        title="Visão Geral",
+        payload=(
+            distribution_summary,
+            scatter_summary,
+            correlation_summary,
+        ),
+        session_prefix="overview",
+        generator_function=lambda payload: (
+            generate_overview_insight(
+                payload[0],
+                payload[1],
+                payload[2],
+            )
+        ),
     )

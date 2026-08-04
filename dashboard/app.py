@@ -1,9 +1,7 @@
 """
 Página principal do Dashboard de Vulnerabilidade Educacional.
 """
-
 from textwrap import dedent
-
 import pandas as pd
 import streamlit as st
 
@@ -11,7 +9,9 @@ from components.charts import (
     render_infrastructure_scatter,
     render_correlation_heatmap,
     render_ive_distribution,
+    render_overview_ai,
 )
+
 from components.data_loader import load_dashboard_data
 from components.filters import apply_dashboard_filters
 from components.map import render_ive_map
@@ -545,6 +545,7 @@ def build_ranking_column_config(
     return column_config
 
 
+
 def main() -> None:
     """
     Executa a página inicial do dashboard.
@@ -654,13 +655,13 @@ def main() -> None:
     )
 
     render_municipality_profile(
-    filtered_df=filtered_df,
-    complete_df=complete_df,
+        filtered_df=filtered_df,
+        complete_df=complete_df,
     )
 
     st.markdown(
-    "<br>",
-    unsafe_allow_html=True,
+        "<br>",
+        unsafe_allow_html=True,
     )
 
     st.subheader("Distribuição territorial da vulnerabilidade")
@@ -703,8 +704,10 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
-    st.subheader("Análise dos indicadores")
-
+    st.subheader("Visão Geral - indicadores")
+  
+    
+   
     chart_col1, chart_col2 = st.columns(
         [1, 1],
         gap="large",
@@ -723,6 +726,12 @@ def main() -> None:
 
     render_infrastructure_scatter(filtered_df)
 
+    st.markdown(
+    "<br>",
+    unsafe_allow_html=True,
+)
+
+    render_overview_ai(filtered_df)
 
 if __name__ == "__main__":
     main()
