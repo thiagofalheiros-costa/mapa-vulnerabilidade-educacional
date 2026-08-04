@@ -2,21 +2,19 @@
 Página principal do Dashboard de Vulnerabilidade Educacional.
 """
 from textwrap import dedent
+
 import pandas as pd
 import streamlit as st
-
 from components.charts import (
-    render_infrastructure_scatter,
     render_correlation_heatmap,
+    render_infrastructure_scatter,
     render_ive_distribution,
     render_overview_ai,
 )
-
 from components.data_loader import load_dashboard_data
 from components.filters import apply_dashboard_filters
 from components.map import render_ive_map
 from components.municipality_profile import render_municipality_profile
-
 
 st.set_page_config(
     page_title="Mapa da Vulnerabilidade Educacional",
@@ -213,7 +211,7 @@ def apply_custom_style() -> None:
     )
 
 
-def format_integer(value: int | float) -> str:
+def format_integer(value: float) -> str:
     """
     Formata números inteiros com ponto como separador de milhar.
     """
@@ -239,7 +237,7 @@ def format_decimal(
     )
 
 
-def format_ordinal(value: int | float) -> str:
+def format_ordinal(value: float) -> str:
     """
     Formata uma posição utilizando o indicador ordinal masculino.
     """

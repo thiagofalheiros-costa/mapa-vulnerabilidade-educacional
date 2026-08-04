@@ -12,7 +12,6 @@ import pandas as pd
 from src.config import INSE_PATH, RENDIMENTO_PATH, TDI_PATH
 from src.logger import setup_logger
 
-
 logger = setup_logger()
 
 

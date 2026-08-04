@@ -16,7 +16,6 @@ from src.config import (
 )
 from src.logger import setup_logger
 
-
 logger = setup_logger()
 
 

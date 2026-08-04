@@ -28,7 +28,6 @@ from branca.colormap import LinearColormap
 from matplotlib.patches import Patch
 from matplotlib_scalebar.scalebar import ScaleBar
 
-
 DEFAULT_TARGET_CRS = "EPSG:4674"
 
 # SIRGAS 2000 / UTM zone 22S.
@@ -442,12 +441,14 @@ def merge_municipality_geodata(
             f"'{indicator_column}'. Códigos: {missing_indicator[:20]}"
         )
 
-    if expected_municipalities is not None:
-        if len(merged) != expected_municipalities:
-            raise ValueError(
-                f"A base integrada possui {len(merged)} municípios, "
-                f"mas eram esperados {expected_municipalities}."
-            )
+    if (
+    expected_municipalities is not None
+    and len(merged) != expected_municipalities
+    ):
+        raise ValueError(
+        f"A base integrada possui {len(merged)} municípios, "
+        f"mas eram esperados {expected_municipalities}."
+        )
 
     return gpd.GeoDataFrame(
         merged,
@@ -560,7 +561,7 @@ def validate_geodata(
         )
 
     summary = {
-        "municipios_total": int(len(geodata)),
+        "municipios_total": len(geodata),
         "municipios_unicos": int(
             geodata[code_column].nunique()
         ),

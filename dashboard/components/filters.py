@@ -2,12 +2,10 @@
 Componentes de filtragem utilizados no dashboard.
 """
 
-from typing import Optional
+import math
 
 import pandas as pd
 import streamlit as st
-import math
-
 
 REGION_COLUMN_CANDIDATES = [
     "NM_RGINT",
@@ -17,7 +15,7 @@ REGION_COLUMN_CANDIDATES = [
 ]
 
 
-def find_region_column(df: pd.DataFrame) -> Optional[str]:
+def find_region_column(df: pd.DataFrame) -> str | None:
     """
     Identifica a coluna territorial disponível na base.
 
@@ -38,7 +36,7 @@ def find_region_column(df: pd.DataFrame) -> Optional[str]:
     return None
 
 
-def identify_category_column(df: pd.DataFrame) -> Optional[str]:
+def identify_category_column(df: pd.DataFrame) -> str | None:
     """
     Identifica a coluna de categoria do IVE disponível na base.
 

@@ -11,13 +11,12 @@ from pathlib import Path
 import pandas as pd
 
 from src.aggregation.aggregate_censo import aggregate_by_municipality
-from src.features.censo_features import create_features
 from src.config import (
     CENSO_PROCESSED_PATH,
     MUNICIPALITY_FEATURES_PATH,
 )
+from src.features.censo_features import create_features
 from src.logger import setup_logger
-
 
 logger = setup_logger()
 

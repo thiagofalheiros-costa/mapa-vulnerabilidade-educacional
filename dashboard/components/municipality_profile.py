@@ -4,18 +4,16 @@ Componente de diagnóstico municipal do dashboard.
 
 from __future__ import annotations
 
-from typing import Final
 import logging
+from html import escape
+from typing import Final
 
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-from html import escape
-
 from components.municipality_insights import (
     generate_municipality_insight,
 )
-
 
 PRIMARY_COLOR: Final[str] = "#17365D"
 SECONDARY_COLOR: Final[str] = "#2F75B5"
@@ -87,7 +85,7 @@ def format_integer(value: float) -> str:
     if pd.isna(value):
         return "N/D"
 
-    return f"{int(round(float(value))):,}".replace(",", ".")
+    return f"{round(float(value)):,}".replace(",", ".")
 
 
 def format_percent(value: float) -> str:
@@ -488,8 +486,18 @@ def render_ai_insight(
     """
     Renderiza a análise inteligente do município selecionado.
     """
-    municipality_name = str(municipality["NO_MUNICIPIO"])
-    municipality_code = str(municipality["CO_MUNICIPIO"])
+    municipality_name = str(
+        municipality.get(
+            "NO_MUNICIPIO",
+            "Município não identificado",
+        )
+    )
+    municipality_code = str(
+        municipality.get(
+            "CO_MUNICIPIO",
+            "Código não disponível",
+        )
+    )
 
     state_key = "municipality_ai_insight"
     municipality_key = "municipality_ai_code"
@@ -524,25 +532,79 @@ def render_ai_insight(
             category_column=category_column,
         )
 
+        logger.info(
+            "Iniciando análise municipal com IA. "
+            "municipio=%s codigo=%s",
+            municipality_name,
+            municipality_code,
+        )
+
         try:
             with st.spinner(
                 f"Analisando os indicadores de {municipality_name}..."
             ):
-                st.session_state[state_key] = (
+                generated_insight = (
                     generate_municipality_insight(payload)
                 )
 
+                st.session_state[state_key] = generated_insight
+
+            logger.info(
+                "Análise municipal gerada com sucesso. "
+                "municipio=%s codigo=%s tamanho_resposta=%s",
+                municipality_name,
+                municipality_code,
+                len(generated_insight),
+            )
+
         except ValueError as error:
+            logger.warning(
+                "Falha de validação na análise municipal. "
+                "municipio=%s codigo=%s erro=%s",
+                municipality_name,
+                municipality_code,
+                error,
+            )
+
             st.error(str(error))
 
-        except Exception:
-            logger.exception(
-                "Erro ao gerar análise inteligente de %s.",
+        except TimeoutError:
+            logger.warning(
+                "Tempo limite excedido na análise municipal. "
+                "municipio=%s codigo=%s",
                 municipality_name,
+                municipality_code,
             )
 
             st.warning(
-                "Não foi possível gerar a análise automática neste momento."
+                "A geração da análise demorou mais que o esperado. "
+                "Tente novamente em alguns instantes."
+            )
+
+        except ConnectionError:
+            logger.warning(
+                "Falha de conexão na análise municipal. "
+                "municipio=%s codigo=%s",
+                municipality_name,
+                municipality_code,
+            )
+
+            st.warning(
+                "Não foi possível conectar ao serviço de IA. "
+                "Verifique sua conexão e tente novamente."
+            )
+
+        except Exception:
+            logger.exception(
+                "Erro inesperado na análise municipal. "
+                "municipio=%s codigo=%s",
+                municipality_name,
+                municipality_code,
+            )
+
+            st.warning(
+                "Não foi possível gerar a análise automática "
+                "neste momento."
             )
 
     if st.session_state[state_key]:
@@ -550,7 +612,9 @@ def render_ai_insight(
             "📄 Mostrar análise",
             expanded=True,
         ):
-            st.markdown(st.session_state[state_key])
+            st.markdown(
+                st.session_state[state_key]
+            )
 
     else:
         st.info(

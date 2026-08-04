@@ -96,7 +96,7 @@ def sample_index() -> pd.DataFrame:
                 "Média",
                 "Muito alta",
             ],
-            "IVE_RANK": [
+            "RANK_VULNERABILIDADE": [
                 3,
                 2,
                 1,
@@ -177,7 +177,7 @@ def test_merge_raises_error_for_unmatched_municipality(
 
     with pytest.raises(
         ValueError,
-        match="municípios da malha não foram encontrados",
+        match="A base integrada possui 2 municípios, mas eram esperados 3",
     ):
         merge_municipality_geodata(
             boundaries=sample_boundaries,

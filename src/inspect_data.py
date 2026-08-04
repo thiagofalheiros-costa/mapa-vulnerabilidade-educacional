@@ -10,14 +10,12 @@ Autor: Thiago Falheiros
 """
 
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 
 from src.load_data import read_data
 from src.logger import setup_logger
 from src.utils import create_directory, list_files
-
 
 logger = setup_logger()
 
@@ -75,7 +73,7 @@ def find_data_files(directory: Path) -> list[Path]:
 
 def create_file_inventory(
     files: list[Path],
-    base_directory: Optional[Path] = None,
+    base_directory: Path | None = None,
 ) -> pd.DataFrame:
     """
     Cria um inventário dos arquivos encontrados.
@@ -121,7 +119,7 @@ def create_file_inventory(
 
 def select_main_data_file(
     files: list[Path],
-    filename_terms: Optional[list[str]] = None,
+    filename_terms: list[str] | None = None,
 ) -> Path:
     """
     Seleciona o arquivo principal mais provável.
@@ -448,7 +446,7 @@ def inspect_directory(
     output_directory: Path,
     sample_size: int = 5_000,
     report_prefix: str = "inspecao_dados",
-    filename_terms: Optional[list[str]] = None,
+    filename_terms: list[str] | None = None,
 ) -> dict[str, pd.DataFrame]:
     """
     Localiza e inspeciona o principal arquivo de uma pasta.

@@ -276,8 +276,10 @@ def execute_validation_report(
         "",
         "## Análise fatorial exploratória",
         "",
+        (
         f"- **KMO geral:** {_format_decimal(kmo)} "
-        f"({_kmo_interpretation(kmo)}).",
+        f"({_kmo_interpretation(kmo)})."
+        ),
         f"- **Teste de Bartlett:** p = {bartlett_p:.3e}.",
         f"- **Número de fatores retidos:** {number_of_factors}.",
         "",

@@ -5,15 +5,18 @@ Responsável pela construção dos prompts enviados ao Gemini
 e pela interface reutilizável de geração das análises.
 """
 
+
 from __future__ import annotations
 
 import hashlib
+import logging
 
 import pandas as pd
 import streamlit as st
 
-from components.gemini_service import generate_gemini_response
+from .gemini_service import generate_gemini_response
 
+logger = logging.getLogger(__name__)
 
 def format_number(
     value: object,
@@ -172,7 +175,7 @@ def render_ai_analysis(
 
     st.caption(
         "🤖 Conteúdo gerado automaticamente por IA "
-        f"a partir dos dados dos gráficos acima."
+        "a partir dos dados dos gráficos acima."
     )
 
     if st.button(
@@ -181,13 +184,38 @@ def render_ai_analysis(
         type="primary",
         width="stretch",
     ):
+        try:
+            with st.spinner(
+                "Gerando análise..."
+            ):
+                st.session_state[insight_key] = (
+                    generator_function(payload)
+                )
 
-        with st.spinner(
-            "Gerando análise..."
-        ):
+        except ValueError as error:
+            st.error(str(error))
 
-            st.session_state[insight_key] = (
-                generator_function(payload)
+        except TimeoutError:
+            st.warning(
+                "A geração da análise demorou mais que o esperado. "
+                "Tente novamente em alguns instantes."
+            )
+
+        except ConnectionError:
+            st.warning(
+                "Não foi possível conectar ao serviço de IA. "
+                "Verifique sua conexão e tente novamente."
+            )
+
+        except Exception:
+            logger.exception(
+                "Erro ao gerar análise inteligente: %s.",
+                title,
+            )
+
+            st.warning(
+                "Não foi possível gerar a análise automática "
+                "neste momento."
             )
 
     if st.session_state[insight_key]:
@@ -204,6 +232,6 @@ def render_ai_analysis(
     else:
 
         st.info(
-            "Clique no botão acima para gerar "
-            "uma análise automática deste gráfico."
+            "Clique no botão acima para gerar uma análise integrada "
+            "dos indicadores apresentados nos gráficos."
         )

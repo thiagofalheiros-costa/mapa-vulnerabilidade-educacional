@@ -8,13 +8,14 @@ A construção dos prompts fica a cargo dos módulos especializados
 
 from __future__ import annotations
 
+import logging
 import os
 from pathlib import Path
+from time import perf_counter
 
 import streamlit as st
 from dotenv import load_dotenv
 from google import genai
-
 
 # =============================================================================
 # Configuração
@@ -26,6 +27,8 @@ ENV_PATH = PROJECT_ROOT / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
 GEMINI_MODEL = "gemini-3.6-flash"
+
+logger = logging.getLogger(__name__)
 
 
 # =============================================================================
@@ -44,12 +47,23 @@ def get_gemini_client() -> genai.Client:
     api_key = os.getenv("GEMINI_API_KEY")
 
     if not api_key:
+        logger.error(
+            "Falha ao criar cliente Gemini: variável "
+            "GEMINI_API_KEY ausente."
+        )
+
         raise ValueError(
             "A variável GEMINI_API_KEY não foi encontrada. "
             f"Verifique o arquivo: {ENV_PATH}"
         )
 
-    return genai.Client(api_key=api_key)
+    logger.debug(
+        "Criando cliente Gemini."
+    )
+
+    return genai.Client(
+        api_key=api_key
+    )
 
 
 # =============================================================================
@@ -85,22 +99,62 @@ def generate_gemini_response(
         Texto retornado pela API.
     """
     if not prompt.strip():
+        logger.warning(
+            "Tentativa de chamada à Gemini com prompt vazio."
+        )
+
         raise ValueError(
             "O prompt enviado para o Gemini está vazio."
         )
 
-    client = get_gemini_client()
+    start_time = perf_counter()
 
-    interaction = client.interactions.create(
-        model=model,
-        input=prompt,
+    logger.info(
+        "Iniciando chamada à Gemini. "
+        "modelo=%s tamanho_prompt=%s",
+        model,
+        len(prompt),
     )
 
-    response_text = interaction.output_text
+    try:
+        client = get_gemini_client()
 
-    if not response_text:
-        raise RuntimeError(
-            "A Gemini API não retornou conteúdo textual."
+        interaction = client.interactions.create(
+            model=model,
+            input=prompt,
         )
 
-    return response_text.strip()
+        response_text = interaction.output_text
+
+        if not response_text:
+            raise RuntimeError(
+                "A Gemini API não retornou conteúdo textual."
+            )
+
+        cleaned_response = response_text.strip()
+        elapsed_time = perf_counter() - start_time
+
+        logger.info(
+            "Chamada à Gemini concluída. "
+            "modelo=%s tempo_segundos=%.3f "
+            "tamanho_resposta=%s",
+            model,
+            elapsed_time,
+            len(cleaned_response),
+        )
+
+        return cleaned_response
+
+    except Exception:
+        elapsed_time = perf_counter() - start_time
+
+        logger.exception(
+            "Falha na chamada à Gemini. "
+            "modelo=%s tempo_segundos=%.3f "
+            "tamanho_prompt=%s",
+            model,
+            elapsed_time,
+            len(prompt),
+        )
+
+        raise

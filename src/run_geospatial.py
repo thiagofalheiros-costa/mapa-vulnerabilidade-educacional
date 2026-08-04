@@ -9,8 +9,8 @@ from src.config import (
     IVE_INTERACTIVE_MAP_PATH,
     IVE_PRIORITY_MAP_PATH,
     MAPS_DIR,
-    MUNICIPALITY_GEODATA_PATH,
     MUNICIPALITY_FINAL_INDEX_PATH,
+    MUNICIPALITY_GEODATA_PATH,
     MUNICIPALITY_SHAPEFILE_PATH,
 )
 from src.geospatial import (
@@ -28,7 +28,6 @@ from src.geospatial import (
     validate_geodata,
 )
 from src.logger import setup_logger
-
 
 logger = setup_logger()
 

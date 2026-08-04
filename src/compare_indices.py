@@ -1,8 +1,9 @@
 """Comparação entre o IVE manual, PCA e análise fatorial."""
 
+from collections.abc import Sequence
 from itertools import combinations
 from pathlib import Path
-from typing import Final, Sequence
+from typing import Final
 
 import numpy as np
 import pandas as pd
@@ -134,7 +135,7 @@ def calculate_index_correlations(comparison: pd.DataFrame) -> pd.DataFrame:
                 "CORRELACAO_PEARSON": float(pearson),
                 "CORRELACAO_SPEARMAN": float(spearman),
                 "P_VALOR_SPEARMAN": float(p_value),
-                "NUM_OBSERVACOES": int(len(pair)),
+                "NUM_OBSERVACOES": len(pair),
             }
         )
 

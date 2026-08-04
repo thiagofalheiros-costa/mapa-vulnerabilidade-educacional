@@ -7,7 +7,6 @@ import pandas as pd
 from src.logger import setup_logger
 from src.metadata.censo import INFRA_COLUMNS
 
-
 logger = setup_logger()
 
 

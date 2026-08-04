@@ -13,7 +13,9 @@ gemini_service.py.
 
 from __future__ import annotations
 
-from components.gemini_service import generate_gemini_response
+import math
+
+from .gemini_service import generate_gemini_response
 
 
 def format_number(
@@ -32,7 +34,7 @@ def format_number(
     except (TypeError, ValueError):
         return "Não disponível"
 
-    if numeric_value != numeric_value:
+    if math.isnan(numeric_value):
         return "Não disponível"
 
     formatted = f"{numeric_value:,.{decimals}f}"

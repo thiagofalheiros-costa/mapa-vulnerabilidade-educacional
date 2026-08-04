@@ -8,7 +8,6 @@ dependência administrativa e matrículas.
 
 import pandas as pd
 
-
 REQUIRED_COLUMNS = [
     "CO_MUNICIPIO",
     "NO_MUNICIPIO",

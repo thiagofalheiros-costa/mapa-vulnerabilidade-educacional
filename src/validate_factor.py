@@ -5,8 +5,8 @@ Este módulo utiliza apenas NumPy, pandas, SciPy e scikit-learn,
 evitando dependência do pacote factor-analyzer.
 """
 
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 import numpy as np
 import pandas as pd
@@ -23,7 +23,6 @@ from src.validate_pca import (
     _orient_features,
     _validate_columns,
 )
-
 
 logger = setup_logger()
 

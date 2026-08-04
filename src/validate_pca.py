@@ -1,7 +1,7 @@
 """Validação do IVE por Análise de Componentes Principais."""
 
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 import numpy as np
 import pandas as pd
@@ -10,7 +10,6 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 
 from src.logger import setup_logger
-
 
 logger = setup_logger()
 

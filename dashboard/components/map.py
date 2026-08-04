@@ -3,7 +3,6 @@ Componente de mapa interativo do dashboard.
 """
 
 from pathlib import Path
-from typing import Optional
 
 import branca.colormap as cm
 import folium
@@ -12,7 +11,6 @@ import pandas as pd
 import streamlit as st
 from streamlit_folium import folium_static
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
@@ -20,6 +18,11 @@ REQUIRED_GEO_COLUMNS = {
     "CO_MUNICIPIO",
     "geometry",
 }
+
+# A simplificação é realizada em metros em uma projeção adequada ao RS.
+# O valor reduz o tamanho do GeoJSON sem comprometer a leitura estadual.
+SIMPLIFICATION_CRS = "EPSG:31982"
+SIMPLIFICATION_TOLERANCE_METERS = 250
 
 
 def normalize_municipality_code(
@@ -47,6 +50,7 @@ def normalize_municipality_code(
     )
 
 
+@st.cache_data(show_spinner=False)
 def find_geospatial_file() -> Path:
     """
     Localiza automaticamente uma base geoespacial em data/processed.
@@ -89,8 +93,37 @@ def find_geospatial_file() -> Path:
     )
 
 
+def simplify_geometries(
+    geodata: gpd.GeoDataFrame,
+) -> gpd.GeoDataFrame:
+    """
+    Simplifica as geometrias municipais para acelerar o Folium.
+
+    A simplificação ocorre em projeção métrica, preservando a
+    topologia, e a malha retorna ao EPSG:4326.
+    """
+    projected = geodata.to_crs(
+        SIMPLIFICATION_CRS
+    ).copy()
+
+    projected["geometry"] = (
+        projected["geometry"]
+        .simplify(
+            tolerance=SIMPLIFICATION_TOLERANCE_METERS,
+            preserve_topology=True,
+        )
+    )
+
+    projected = projected[
+        projected["geometry"].notna()
+        & ~projected["geometry"].is_empty
+    ].copy()
+
+    return projected.to_crs(epsg=4326)
+
+
 @st.cache_data(
-    show_spinner="Carregando a malha municipal..."
+    show_spinner="Carregando e otimizando a malha municipal..."
 )
 def load_geospatial_data() -> gpd.GeoDataFrame:
     """
@@ -124,15 +157,26 @@ def load_geospatial_data() -> gpd.GeoDataFrame:
             "referência de coordenadas definido."
         )
 
-    if geodata.crs.to_epsg() != 4326:
-        geodata = geodata.to_crs(epsg=4326)
+    geodata = simplify_geometries(
+        geodata
+    )
 
-    return geodata
+    if geodata.empty:
+        raise ValueError(
+            "A simplificação removeu todas as geometrias válidas."
+        )
+
+    return geodata[
+        [
+            "CO_MUNICIPIO",
+            "geometry",
+        ]
+    ].copy()
 
 
 def identify_category_column(
     dataframe: pd.DataFrame,
-) -> Optional[str]:
+) -> str | None:
     """
     Identifica a coluna de categoria do IVE.
     """
@@ -165,7 +209,7 @@ def format_decimal_br(
 
 
 def format_integer_br(
-    value: int | float,
+    value: float,
 ) -> str:
     """
     Formata um número inteiro com ponto como separador de milhar.
@@ -388,7 +432,7 @@ def create_tooltip(
         fields=fields,
         aliases=aliases,
         localize=False,
-        sticky=True,
+        sticky=False,
         labels=True,
         style=(
             "background-color: white;"
@@ -475,13 +519,13 @@ def create_ive_map(
         }
 
     folium.GeoJson(
-        data=formatted_data.to_json(),
+        data=formatted_data.__geo_interface__,
         name="IVE municipal",
         style_function=style_function,
         highlight_function=highlight_function,
         tooltip=create_tooltip(formatted_data),
         zoom_on_click=False,
-        smooth_factor=1,
+        smooth_factor=2,
         show=True,
     ).add_to(municipality_map)
 
@@ -502,7 +546,7 @@ def create_ive_map(
         )
 
         folium.GeoJson(
-            data=priority_data.to_json(),
+            data=priority_data.__geo_interface__,
             name="Top 50",
             style_function=lambda _: {
                 "fillColor": "#E63228",
@@ -518,7 +562,7 @@ def create_ive_map(
             },
             tooltip=create_tooltip(priority_data),
             zoom_on_click=False,
-            smooth_factor=1,
+            smooth_factor=2,
         ).add_to(priority_group)
 
         priority_group.add_to(municipality_map)

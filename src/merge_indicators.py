@@ -14,7 +14,6 @@ from src.config import MUNICIPALITY_INDICATORS_PATH
 from src.load_indicators import load_inse, load_rendimento, load_tdi
 from src.logger import setup_logger
 
-
 logger = setup_logger()
 
 

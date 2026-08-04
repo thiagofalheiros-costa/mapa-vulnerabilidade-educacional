@@ -6,13 +6,11 @@ Autor: Thiago Falheiros
 """
 
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 
 from src.logger import setup_logger
 from src.utils import normalize_columns
-
 
 logger = setup_logger()
 
@@ -173,8 +171,8 @@ def detect_encoding(file_path: Path) -> str:
 
 def read_csv_file(
     file_path: Path,
-    usecols: Optional[list[str]] = None,
-    nrows: Optional[int] = None,
+    usecols: list[str] | None = None,
+    nrows: int | None = None,
     low_memory: bool = False,
 ) -> pd.DataFrame:
     """
@@ -226,8 +224,8 @@ def read_csv_file(
 def read_excel_file(
     file_path: Path,
     sheet_name: str | int = 0,
-    usecols: Optional[list[str]] = None,
-    nrows: Optional[int] = None,
+    usecols: list[str] | None = None,
+    nrows: int | None = None,
 ) -> pd.DataFrame:
     """
     Carrega arquivos Excel.
@@ -266,8 +264,8 @@ def read_excel_file(
 
 def read_data(
     file_path: str | Path,
-    usecols: Optional[list[str]] = None,
-    nrows: Optional[int] = None,
+    usecols: list[str] | None = None,
+    nrows: int | None = None,
     sheet_name: str | int = 0,
     normalize: bool = True,
 ) -> pd.DataFrame:

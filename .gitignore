@@ -5,7 +5,7 @@ venv/
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
+*.pyopyte
 *.pyd
 *.pyc
 
@@ -51,3 +51,6 @@ data/external/*
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Teste
+.pytest_cache/
