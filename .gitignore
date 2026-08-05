@@ -62,3 +62,15 @@ htmlcov/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Dados brutos e intermediários
+data/raw/
+data/interim/
+data/external/
+
+# Ignorar arquivos processados por padrão
+data/processed/*
+
+# Manter as bases necessárias ao dashboard
+!data/processed/municipality_vulnerability.parquet
+!data/processed/municipality_base.parquet
