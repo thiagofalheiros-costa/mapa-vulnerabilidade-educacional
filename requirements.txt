@@ -1,0 +1,14 @@
+﻿streamlit==1.57.0
+pandas==3.0.2
+numpy==2.4.4
+pyarrow==24.0.0
+plotly==6.7.0
+folium==0.20.0
+streamlit-folium==0.27.3
+branca==0.8.2
+geopandas==1.1.4
+shapely==2.1.2
+pyproj==3.7.2
+pyogrio==0.13.0
+python-dotenv==1.2.2
+google-genai==2.16.0

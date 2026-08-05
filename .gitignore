@@ -9,21 +9,17 @@ __pycache__/
 *.pyd
 *.pyc
 
+
 # Jupyter
 .ipynb_checkpoints/
 
 # VS Code
 .vscode/
+.idea/
 
 # Sistema operacional
 .DS_Store
 Thumbs.db
-
-# Variáveis de ambiente
-.env
-
-# Logs
-*.log
 
 # Modelos gerados
 models/*.pkl
@@ -49,8 +45,20 @@ data/external/*
 !reports/maps/.gitkeep
 !reports/tables/.gitkeep
 
-# Streamlit
+# Variáveis e credenciais
+.env
+.env.*
+!.env.example
 .streamlit/secrets.toml
+# Logs
+*.log
 
-# Teste
+
+# Testes e análise estática
 .pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
