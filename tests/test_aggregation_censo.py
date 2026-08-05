@@ -35,7 +35,7 @@ def create_school_dataframe() -> pd.DataFrame:
                 1002,
                 2001,
             ],
-            "QT_MAT_BAS": [
+            "QT_MAT_MED_PROP": [
                 100,
                 200,
                 50,
@@ -136,7 +136,7 @@ def test_total_enrollment_is_preserved() -> None:
 
     assert (
         result["NUM_MATRICULAS"].sum()
-        == df["QT_MAT_BAS"].sum()
+        == df["QT_MAT_MED_PROP"].sum()
     )
 
 

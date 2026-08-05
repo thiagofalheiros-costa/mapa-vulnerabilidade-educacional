@@ -15,7 +15,7 @@ from src.logger import setup_logger
 logger = setup_logger()
 
 
-EXPECTED_MUNICIPALITIES = 497
+EXPECTED_MUNICIPALITIES = 496
 
 IDENTIFICATION_COLUMNS = [
     "CO_MUNICIPIO",

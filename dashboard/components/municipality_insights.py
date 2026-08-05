@@ -11,11 +11,13 @@ Toda a comunicação com a Gemini API é realizada pelo
 gemini_service.py.
 """
 
+
 from __future__ import annotations
 
 import math
 
 from .gemini_service import generate_gemini_response
+
 
 
 def format_number(

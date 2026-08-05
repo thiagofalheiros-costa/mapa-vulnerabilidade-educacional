@@ -631,7 +631,7 @@ def render_municipality_profile(
     st.subheader("Diagnóstico municipal")
     st.caption(
         "Selecione um município presente nos filtros atuais para comparar "
-        "seus resultados com a média dos 497 municípios do estado."
+        "seus resultados com a média dos 496 municípios analisados."
     )
 
     municipality = select_municipality(filtered_df)

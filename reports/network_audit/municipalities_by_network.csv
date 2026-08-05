@@ -1,0 +1,497 @@
+﻿CO_MUNICIPIO,NO_MUNICIPIO,ESCOLAS_ESTADUAL,ESCOLAS_FEDERAL,ESCOLAS_MUNICIPAL,MATRICULAS_ESTADUAL,MATRICULAS_FEDERAL,MATRICULAS_MUNICIPAL,REDES_PRESENTES,TOTAL_ESCOLAS_EM,OFERTA_EXCLUSIVAMENTE_MUNICIPAL,POSSUI_REDE_MUNICIPAL
+4300034,Aceguá,1,0,0,138,0,0,Estadual,1,False,False
+4300109,Agudo,2,0,0,391,0,0,Estadual,2,False,False
+4300208,Ajuricaba,1,0,0,133,0,0,Estadual,1,False,False
+4300307,Alecrim,1,0,0,122,0,0,Estadual,1,False,False
+4300406,Alegrete,8,0,8,1615,0,111,Estadual + Municipal,16,False,True
+4300455,Alegria,1,0,0,85,0,0,Estadual,1,False,False
+4300471,Almirante Tamandaré do Sul,1,0,0,48,0,0,Estadual,1,False,False
+4300505,Alpestre,1,0,0,163,0,0,Estadual,1,False,False
+4300554,Alto Alegre,1,0,0,35,0,0,Estadual,1,False,False
+4300570,Alto Feliz,1,0,0,45,0,0,Estadual,1,False,False
+4300604,Alvorada,12,0,0,5654,0,0,Estadual,12,False,False
+4300638,Amaral Ferrador,1,0,0,189,0,0,Estadual,1,False,False
+4300646,Ametista do Sul,1,0,0,245,0,0,Estadual,1,False,False
+4300661,André da Rocha,1,0,0,23,0,0,Estadual,1,False,False
+4300703,Anta Gorda,1,0,0,95,0,0,Estadual,1,False,False
+4300802,Antônio Prado,3,0,0,316,0,0,Estadual,3,False,False
+4300851,Arambaré,2,0,0,140,0,0,Estadual,2,False,False
+4300877,Araricá,1,0,0,224,0,0,Estadual,1,False,False
+4300901,Aratiba,1,0,0,138,0,0,Estadual,1,False,False
+4301305,Arroio Grande,1,0,0,404,0,0,Estadual,1,False,False
+4301008,Arroio do Meio,1,0,0,454,0,0,Estadual,1,False,False
+4301073,Arroio do Padre,1,0,0,179,0,0,Estadual,1,False,False
+4301057,Arroio do Sal,1,0,0,362,0,0,Estadual,1,False,False
+4301206,Arroio do Tigre,1,0,0,310,0,0,Estadual,1,False,False
+4301107,Arroio dos Ratos,1,0,0,388,0,0,Estadual,1,False,False
+4301404,Arvorezinha,1,0,0,121,0,0,Estadual,1,False,False
+4301503,Augusto Pestana,1,0,0,128,0,0,Estadual,1,False,False
+4301602,Bagé,10,0,0,2849,0,0,Estadual,10,False,False
+4301636,Balneário Pinhal,1,0,0,431,0,0,Estadual,1,False,False
+4301958,Barra Funda,1,0,0,53,0,0,Estadual,1,False,False
+4301859,Barra do Guarita,1,0,0,82,0,0,Estadual,1,False,False
+4301875,Barra do Quaraí,1,0,0,154,0,0,Estadual,1,False,False
+4301909,Barra do Ribeiro,2,0,0,295,0,0,Estadual,2,False,False
+4301925,Barra do Rio Azul,1,0,0,41,0,0,Estadual,1,False,False
+4301800,Barracão,1,0,0,118,0,0,Estadual,1,False,False
+4302006,Barros Cassal,1,0,0,222,0,0,Estadual,1,False,False
+4301651,Barão,1,0,0,133,0,0,Estadual,1,False,False
+4301701,Barão de Cotegipe,1,0,0,139,0,0,Estadual,1,False,False
+4301750,Barão do Triunfo,1,0,0,164,0,0,Estadual,1,False,False
+4302055,Benjamin Constant do Sul,2,0,0,75,0,0,Estadual,2,False,False
+4302105,Bento Gonçalves,6,0,1,2047,0,105,Estadual + Municipal,7,False,True
+4302154,Boa Vista das Missões,1,0,0,53,0,0,Estadual,1,False,False
+4302204,Boa Vista do Buricá,1,0,0,131,0,0,Estadual,1,False,False
+4302220,Boa Vista do Cadeado,1,0,0,40,0,0,Estadual,1,False,False
+4302238,Boa Vista do Incra,1,0,0,49,0,0,Estadual,1,False,False
+4302253,Boa Vista do Sul,1,0,0,52,0,0,Estadual,1,False,False
+4302303,Bom Jesus,1,0,0,255,0,0,Estadual,1,False,False
+4302352,Bom Princípio,1,0,0,255,0,0,Estadual,1,False,False
+4302378,Bom Progresso,1,0,0,46,0,0,Estadual,1,False,False
+4302402,Bom Retiro do Sul,1,0,0,276,0,0,Estadual,1,False,False
+4302451,Boqueirão do Leão,1,0,0,237,0,0,Estadual,1,False,False
+4302501,Bossoroca,1,0,1,133,0,28,Estadual + Municipal,2,False,True
+4302584,Bozano,1,0,0,46,0,0,Estadual,1,False,False
+4302600,Braga,1,0,0,83,0,0,Estadual,1,False,False
+4302659,Brochier,1,0,0,94,0,0,Estadual,1,False,False
+4302709,Butiá,2,0,0,581,0,0,Estadual,2,False,False
+4302907,Cacequi,2,0,0,305,0,0,Estadual,2,False,False
+4303004,Cachoeira do Sul,9,0,0,1681,0,0,Estadual,9,False,False
+4303103,Cachoeirinha,12,0,0,3641,0,0,Estadual,12,False,False
+4303202,Cacique Doble,1,0,0,151,0,0,Estadual,1,False,False
+4303301,Caibaté,1,0,0,117,0,0,Estadual,1,False,False
+4303400,Caiçara,1,0,0,104,0,0,Estadual,1,False,False
+4303509,Camaquã,6,0,0,1421,0,0,Estadual,6,False,False
+4303558,Camargo,1,0,0,76,0,0,Estadual,1,False,False
+4303608,Cambará do Sul,1,0,0,167,0,0,Estadual,1,False,False
+4303673,Campestre da Serra,1,0,0,78,0,0,Estadual,1,False,False
+4303707,Campina das Missões,1,0,0,123,0,0,Estadual,1,False,False
+4303806,Campinas do Sul,1,0,0,68,0,0,Estadual,1,False,False
+4303905,Campo Bom,4,0,0,1731,0,0,Estadual,4,False,False
+4304002,Campo Novo,1,0,0,105,0,0,Estadual,1,False,False
+4304101,Campos Borges,1,0,0,89,0,0,Estadual,1,False,False
+4304200,Candelária,3,0,0,508,0,0,Estadual,3,False,False
+4304358,Candiota,3,0,0,326,0,0,Estadual,3,False,False
+4304408,Canela,4,0,0,1068,0,0,Estadual,4,False,False
+4304507,Canguçu,7,0,0,1150,0,0,Estadual,7,False,False
+4304606,Canoas,18,0,0,8652,0,0,Estadual,18,False,False
+4304614,Canudos do Vale,1,0,0,39,0,0,Estadual,1,False,False
+4304689,Capela de Santana,1,0,0,225,0,0,Estadual,1,False,False
+4304697,Capitão,1,0,0,85,0,0,Estadual,1,False,False
+4304671,Capivari do Sul,1,0,0,162,0,0,Estadual,1,False,False
+4304622,Capão Bonito do Sul,1,0,0,33,0,0,Estadual,1,False,False
+4304630,Capão da Canoa,3,0,0,1601,0,0,Estadual,3,False,False
+4304655,Capão do Cipó,1,0,0,86,0,0,Estadual,1,False,False
+4304663,Capão do Leão,2,0,0,613,0,0,Estadual,2,False,False
+4304705,Carazinho,7,0,0,1332,0,0,Estadual,7,False,False
+4304713,Caraá,1,0,0,191,0,0,Estadual,1,False,False
+4304804,Carlos Barbosa,2,0,0,742,0,0,Estadual,2,False,False
+4304853,Carlos Gomes,1,0,0,33,0,0,Estadual,1,False,False
+4304903,Casca,1,0,0,229,0,0,Estadual,1,False,False
+4304952,Caseiros,1,0,0,104,0,0,Estadual,1,False,False
+4305009,Catuípe,1,0,0,166,0,0,Estadual,1,False,False
+4305108,Caxias do Sul,31,0,0,10898,0,0,Estadual,31,False,False
+4302808,Caçapava do Sul,5,0,0,849,0,0,Estadual,5,False,False
+4305116,Centenário,1,0,0,65,0,0,Estadual,1,False,False
+4305124,Cerrito,2,0,0,141,0,0,Estadual,2,False,False
+4305132,Cerro Branco,1,0,0,86,0,0,Estadual,1,False,False
+4305157,Cerro Grande,1,0,0,28,0,0,Estadual,1,False,False
+4305173,Cerro Grande do Sul,1,0,0,305,0,0,Estadual,1,False,False
+4305207,Cerro Largo,1,0,0,228,0,0,Estadual,1,False,False
+4305306,Chapada,1,0,0,204,0,0,Estadual,1,False,False
+4305355,Charqueadas,2,0,0,702,0,0,Estadual,2,False,False
+4305371,Charrua,2,0,0,62,0,0,Estadual,2,False,False
+4305405,Chiapetta,1,0,0,90,0,0,Estadual,1,False,False
+4305447,Chuvisca,1,0,0,164,0,0,Estadual,1,False,False
+4305439,Chuí,1,0,0,133,0,0,Estadual,1,False,False
+4305454,Cidreira,1,0,0,307,0,0,Estadual,1,False,False
+4305504,Ciríaco,1,0,0,94,0,0,Estadual,1,False,False
+4305587,Colinas,1,0,0,57,0,0,Estadual,1,False,False
+4305603,Colorado,1,0,0,51,0,0,Estadual,1,False,False
+4305702,Condor,1,0,0,111,0,0,Estadual,1,False,False
+4305801,Constantina,1,0,0,247,0,0,Estadual,1,False,False
+4305835,Coqueiro Baixo,1,0,0,28,0,0,Estadual,1,False,False
+4305850,Coqueiros do Sul,1,0,0,65,0,0,Estadual,1,False,False
+4305871,Coronel Barros,1,0,0,38,0,0,Estadual,1,False,False
+4305900,Coronel Bicaco,1,0,0,138,0,0,Estadual,1,False,False
+4305934,Coronel Pilar,1,0,0,35,0,0,Estadual,1,False,False
+4305959,Cotiporã,1,0,0,56,0,0,Estadual,1,False,False
+4305975,Coxilha,1,0,0,43,0,0,Estadual,1,False,False
+4306007,Crissiumal,2,0,0,299,0,0,Estadual,2,False,False
+4306056,Cristal,1,0,0,197,0,0,Estadual,1,False,False
+4306072,Cristal do Sul,1,0,0,84,0,0,Estadual,1,False,False
+4306106,Cruz Alta,7,0,0,1384,0,0,Estadual,7,False,False
+4306130,Cruzaltense,1,0,0,36,0,0,Estadual,1,False,False
+4306205,Cruzeiro do Sul,2,0,0,261,0,0,Estadual,2,False,False
+4304309,Cândido Godói,1,0,0,132,0,0,Estadual,1,False,False
+4306304,David Canabarro,1,0,0,126,0,0,Estadual,1,False,False
+4306320,Derrubadas,1,0,0,92,0,0,Estadual,1,False,False
+4306353,Dezesseis de Novembro,1,0,0,43,0,0,Estadual,1,False,False
+4306379,Dilermando de Aguiar,1,0,0,76,0,0,Estadual,1,False,False
+4306403,Dois Irmãos,2,0,0,772,0,0,Estadual,2,False,False
+4306429,Dois Irmãos das Missões,1,0,0,126,0,0,Estadual,1,False,False
+4306452,Dois Lajeados,1,0,0,70,0,0,Estadual,1,False,False
+4306502,Dom Feliciano,1,0,0,333,0,0,Estadual,1,False,False
+4306601,Dom Pedrito,4,0,0,564,0,0,Estadual,4,False,False
+4306551,Dom Pedro de Alcântara,1,0,0,72,0,0,Estadual,1,False,False
+4306700,Dona Francisca,1,0,0,76,0,0,Estadual,1,False,False
+4306734,Doutor Maurício Cardoso,1,0,0,75,0,0,Estadual,1,False,False
+4306759,Doutor Ricardo,1,0,0,46,0,0,Estadual,1,False,False
+4306767,Eldorado do Sul,3,0,0,1016,0,0,Estadual,3,False,False
+4306809,Encantado,1,0,0,518,0,0,Estadual,1,False,False
+4306908,Encruzilhada do Sul,2,0,0,470,0,0,Estadual,2,False,False
+4306924,Engenho Velho,1,0,0,47,0,0,Estadual,1,False,False
+4306957,Entre Rios do Sul,1,0,0,76,0,0,Estadual,1,False,False
+4306932,Entre-Ijuís,1,0,0,85,0,0,Estadual,1,False,False
+4306973,Erebango,1,0,0,56,0,0,Estadual,1,False,False
+4307005,Erechim,9,0,0,2208,0,0,Estadual,9,False,False
+4307054,Ernestina,1,0,0,58,0,0,Estadual,1,False,False
+4307203,Erval Grande,1,0,0,144,0,0,Estadual,1,False,False
+4307302,Erval Seco,2,0,0,160,0,0,Estadual,2,False,False
+4307401,Esmeralda,1,0,0,98,0,0,Estadual,1,False,False
+4307450,Esperança do Sul,1,0,0,73,0,0,Estadual,1,False,False
+4307500,Espumoso,2,0,0,295,0,0,Estadual,2,False,False
+4307559,Estação,1,0,0,129,0,0,Estadual,1,False,False
+4307708,Esteio,9,0,0,1546,0,0,Estadual,9,False,False
+4307807,Estrela,3,0,0,694,0,0,Estadual,3,False,False
+4307815,Estrela Velha,1,0,0,97,0,0,Estadual,1,False,False
+4307609,Estância Velha,2,0,0,1125,0,0,Estadual,2,False,False
+4307831,Eugênio de Castro,1,0,0,52,0,0,Estadual,1,False,False
+4307864,Fagundes Varela,1,0,0,52,0,0,Estadual,1,False,False
+4307906,Farroupilha,5,0,0,1805,0,0,Estadual,5,False,False
+4308003,Faxinal do Soturno,1,0,0,144,0,0,Estadual,1,False,False
+4308052,Faxinalzinho,1,0,0,55,0,0,Estadual,1,False,False
+4308078,Fazenda Vilanova,1,0,0,147,0,0,Estadual,1,False,False
+4308102,Feliz,1,0,0,167,0,0,Estadual,1,False,False
+4308201,Flores da Cunha,2,0,0,774,0,0,Estadual,2,False,False
+4308250,Floriano Peixoto,1,0,0,30,0,0,Estadual,1,False,False
+4308300,Fontoura Xavier,1,0,0,258,0,0,Estadual,1,False,False
+4308409,Formigueiro,1,0,0,155,0,0,Estadual,1,False,False
+4308433,Forquetinha,1,0,0,124,0,0,Estadual,1,False,False
+4308458,Fortaleza dos Valos,1,0,0,92,0,0,Estadual,1,False,False
+4308508,Frederico Westphalen,3,0,0,797,0,0,Estadual,3,False,False
+4308607,Garibaldi,2,0,0,722,0,0,Estadual,2,False,False
+4308656,Garruchos,1,0,0,72,0,0,Estadual,1,False,False
+4308706,Gaurama,1,0,0,117,0,0,Estadual,1,False,False
+4308805,General Câmara,1,0,0,163,0,0,Estadual,1,False,False
+4308854,Gentil,1,0,0,40,0,0,Estadual,1,False,False
+4308904,Getúlio Vargas,1,0,0,271,0,0,Estadual,1,False,False
+4309001,Giruá,1,0,0,222,0,0,Estadual,1,False,False
+4309050,Glorinha,1,0,0,236,0,0,Estadual,1,False,False
+4309100,Gramado,3,0,0,1063,0,0,Estadual,3,False,False
+4309159,Gramado Xavier,1,0,0,110,0,0,Estadual,1,False,False
+4309126,Gramado dos Loureiros,1,0,0,62,0,0,Estadual,1,False,False
+4309209,Gravataí,18,0,0,6663,0,0,Estadual,18,False,False
+4309258,Guabiju,1,0,0,33,0,0,Estadual,1,False,False
+4309407,Guaporé,2,0,0,577,0,0,Estadual,2,False,False
+4309506,Guarani das Missões,2,0,0,159,0,0,Estadual,2,False,False
+4309308,Guaíba,10,0,0,2652,0,0,Estadual,10,False,False
+4309555,Harmonia,1,0,0,126,0,0,Estadual,1,False,False
+4307104,Herval,2,0,0,201,0,0,Estadual,2,False,False
+4309571,Herveiras,1,0,0,95,0,0,Estadual,1,False,False
+4309605,Horizontina,1,0,0,366,0,0,Estadual,1,False,False
+4309654,Hulha Negra,2,0,0,215,0,0,Estadual,2,False,False
+4309704,Humaitá,1,0,0,21,0,0,Estadual,1,False,False
+4309753,Ibarama,1,0,0,121,0,0,Estadual,1,False,False
+4309803,Ibiaçá,1,0,0,85,0,0,Estadual,1,False,False
+4309902,Ibiraiaras,1,0,0,118,0,0,Estadual,1,False,False
+4309951,Ibirapuitã,1,0,0,95,0,0,Estadual,1,False,False
+4310009,Ibirubá,2,0,0,366,0,0,Estadual,2,False,False
+4310108,Igrejinha,2,0,0,811,0,0,Estadual,2,False,False
+4310207,Ijuí,9,0,0,1969,0,0,Estadual,9,False,False
+4310306,Ilópolis,1,0,0,81,0,0,Estadual,1,False,False
+4310330,Imbé,2,0,0,804,0,0,Estadual,2,False,False
+4310363,Imigrante,1,0,0,71,0,0,Estadual,1,False,False
+4310405,Independência,1,0,0,117,0,0,Estadual,1,False,False
+4310413,Inhacorá,1,0,0,56,0,0,Estadual,1,False,False
+4310462,Ipiranga do Sul,1,0,0,40,0,0,Estadual,1,False,False
+4310439,Ipê,1,0,0,139,0,0,Estadual,1,False,False
+4310504,Iraí,2,0,0,119,0,0,Estadual,2,False,False
+4310538,Itaara,1,0,0,152,0,0,Estadual,1,False,False
+4310553,Itacurubi,1,0,0,83,0,0,Estadual,1,False,False
+4310579,Itapuca,1,0,0,55,0,0,Estadual,1,False,False
+4310603,Itaqui,4,0,0,1031,0,0,Estadual,4,False,False
+4310652,Itati,1,0,0,88,0,0,Estadual,1,False,False
+4310702,Itatiba do Sul,1,0,0,70,0,0,Estadual,1,False,False
+4310751,Ivorá,1,0,0,57,0,0,Estadual,1,False,False
+4310801,Ivoti,1,0,0,402,0,0,Estadual,1,False,False
+4310850,Jaboticaba,1,0,0,101,0,0,Estadual,1,False,False
+4310876,Jacuizinho,1,0,0,100,0,0,Estadual,1,False,False
+4310900,Jacutinga,1,0,0,59,0,0,Estadual,1,False,False
+4311106,Jaguari,2,0,0,145,0,0,Estadual,2,False,False
+4311007,Jaguarão,3,0,1,508,0,44,Estadual + Municipal,4,False,True
+4311122,Jaquirana,1,0,0,151,0,0,Estadual,1,False,False
+4311130,Jari,1,0,0,68,0,0,Estadual,1,False,False
+4311155,Jóia,2,0,0,190,0,0,Estadual,2,False,False
+4311205,Júlio de Castilhos,2,0,0,393,0,0,Estadual,2,False,False
+4311239,Lagoa Bonita do Sul,1,0,0,83,0,0,Estadual,1,False,False
+4311304,Lagoa Vermelha,3,0,0,575,0,0,Estadual,3,False,False
+4311270,Lagoa dos Três Cantos,1,0,0,50,0,0,Estadual,1,False,False
+4311254,Lagoão,1,0,0,153,0,0,Estadual,1,False,False
+4311403,Lajeado,3,0,0,1579,0,0,Estadual,3,False,False
+4311429,Lajeado do Bugre,1,0,0,76,0,0,Estadual,1,False,False
+4311502,Lavras do Sul,1,0,0,225,0,0,Estadual,1,False,False
+4311601,Liberato Salzano,2,0,0,156,0,0,Estadual,2,False,False
+4311627,Lindolfo Collor,1,0,0,175,0,0,Estadual,1,False,False
+4311643,Linha Nova,1,0,0,40,0,0,Estadual,1,False,False
+4311700,Machadinho,1,0,0,177,0,0,Estadual,1,False,False
+4311734,Mampituba,1,0,0,77,0,0,Estadual,1,False,False
+4311759,Manoel Viana,1,0,0,134,0,0,Estadual,1,False,False
+4311775,Maquiné,3,0,0,191,0,0,Estadual,3,False,False
+4311791,Maratá,1,0,0,51,0,0,Estadual,1,False,False
+4311809,Marau,2,0,0,1150,0,0,Estadual,2,False,False
+4311908,Marcelino Ramos,1,0,0,106,0,0,Estadual,1,False,False
+4311981,Mariana Pimentel,1,0,0,94,0,0,Estadual,1,False,False
+4312005,Mariano Moro,1,0,0,52,0,0,Estadual,1,False,False
+4312054,Marques de Souza,1,0,0,62,0,0,Estadual,1,False,False
+4312104,Mata,1,0,0,91,0,0,Estadual,1,False,False
+4312138,Mato Castelhano,1,0,0,74,0,0,Estadual,1,False,False
+4312153,Mato Leitão,1,0,0,125,0,0,Estadual,1,False,False
+4312179,Mato Queimado,1,0,0,45,0,0,Estadual,1,False,False
+4312203,Maximiliano de Almeida,1,0,0,103,0,0,Estadual,1,False,False
+4311718,Maçambará,2,0,1,134,0,32,Estadual + Municipal,3,False,True
+4312252,Minas do Leão,1,0,0,228,0,0,Estadual,1,False,False
+4312302,Miraguaí,1,0,0,143,0,0,Estadual,1,False,False
+4312351,Montauri,1,0,0,40,0,0,Estadual,1,False,False
+4312377,Monte Alegre dos Campos,1,0,0,74,0,0,Estadual,1,False,False
+4312385,Monte Belo do Sul,1,0,0,48,0,0,Estadual,1,False,False
+4312401,Montenegro,5,0,0,1436,0,0,Estadual,5,False,False
+4312427,Mormaço,1,0,0,84,0,0,Estadual,1,False,False
+4312443,Morrinhos do Sul,1,0,0,76,0,0,Estadual,1,False,False
+4312450,Morro Redondo,1,0,0,152,0,0,Estadual,1,False,False
+4312476,Morro Reuter,1,0,0,149,0,0,Estadual,1,False,False
+4312500,Mostardas,2,0,0,332,0,0,Estadual,2,False,False
+4312617,Muitos Capões,1,0,0,65,0,0,Estadual,1,False,False
+4312625,Muliterno,1,0,0,67,0,0,Estadual,1,False,False
+4312609,Muçum,1,0,0,107,0,0,Estadual,1,False,False
+4312674,Nicolau Vergueiro,1,0,0,62,0,0,Estadual,1,False,False
+4312708,Nonoai,1,0,0,376,0,0,Estadual,1,False,False
+4312757,Nova Alvorada,1,0,0,91,0,0,Estadual,1,False,False
+4312807,Nova Araçá,1,0,0,129,0,0,Estadual,1,False,False
+4312906,Nova Bassano,1,0,0,144,0,0,Estadual,1,False,False
+4312955,Nova Boa Vista,1,0,0,123,0,0,Estadual,1,False,False
+4313003,Nova Bréscia,1,0,0,54,0,0,Estadual,1,False,False
+4313011,Nova Candelária,1,0,0,46,0,0,Estadual,1,False,False
+4313037,Nova Esperança do Sul,1,0,0,102,0,0,Estadual,1,False,False
+4313060,Nova Hartz,2,0,0,650,0,0,Estadual,2,False,False
+4313102,Nova Palma,1,0,0,136,0,0,Estadual,1,False,False
+4313201,Nova Petrópolis,2,0,0,454,0,0,Estadual,2,False,False
+4313300,Nova Prata,2,0,0,691,0,0,Estadual,2,False,False
+4313086,Nova Pádua,1,0,0,60,0,0,Estadual,1,False,False
+4313334,Nova Ramada,1,0,0,47,0,0,Estadual,1,False,False
+4313359,Nova Roma do Sul,1,0,0,80,0,0,Estadual,1,False,False
+4313375,Nova Santa Rita,2,0,0,889,0,0,Estadual,2,False,False
+4313490,Novo Barreiro,1,0,0,111,0,0,Estadual,1,False,False
+4313391,Novo Cabrais,1,0,0,91,0,0,Estadual,1,False,False
+4313409,Novo Hamburgo,11,0,0,4356,0,0,Estadual,11,False,False
+4313425,Novo Machado,1,0,0,66,0,0,Estadual,1,False,False
+4313441,Novo Tiradentes,1,0,0,65,0,0,Estadual,1,False,False
+4313466,Novo Xingu,1,0,0,35,0,0,Estadual,1,False,False
+4312658,Não-Me-Toque,1,0,0,380,0,0,Estadual,1,False,False
+4313508,Osório,4,0,0,1209,0,0,Estadual,4,False,False
+4313607,Paim Filho,1,0,0,80,0,0,Estadual,1,False,False
+4313656,Palmares do Sul,1,0,0,167,0,0,Estadual,1,False,False
+4313706,Palmeira das Missões,5,0,0,1099,0,0,Estadual,5,False,False
+4313805,Palmitinho,1,0,0,130,0,0,Estadual,1,False,False
+4313904,Panambi,4,0,0,733,0,0,Estadual,4,False,False
+4313953,Pantano Grande,1,0,0,356,0,0,Estadual,1,False,False
+4314001,Paraí,1,0,0,229,0,0,Estadual,1,False,False
+4314027,Paraíso do Sul,1,0,0,137,0,0,Estadual,1,False,False
+4314035,Pareci Novo,1,0,0,94,0,0,Estadual,1,False,False
+4314050,Parobé,4,0,0,1315,0,0,Estadual,4,False,False
+4314068,Passa Sete,1,0,0,139,0,0,Estadual,1,False,False
+4314100,Passo Fundo,18,0,0,4632,0,0,Estadual,18,False,False
+4314076,Passo do Sobrado,1,0,0,158,0,0,Estadual,1,False,False
+4314134,Paulo Bento,1,0,0,33,0,0,Estadual,1,False,False
+4314159,Paverama,1,0,0,167,0,0,Estadual,1,False,False
+4314175,Pedras Altas,1,0,0,44,0,0,Estadual,1,False,False
+4314209,Pedro Osório,1,0,0,193,0,0,Estadual,1,False,False
+4314308,Pejuçara,1,0,0,79,0,0,Estadual,1,False,False
+4314407,Pelotas,22,0,1,6738,0,464,Estadual + Municipal,23,False,True
+4314423,Picada Café,1,0,0,141,0,0,Estadual,1,False,False
+4314456,Pinhal,1,0,0,92,0,0,Estadual,1,False,False
+4314472,Pinhal Grande,1,0,0,85,0,0,Estadual,1,False,False
+4314464,Pinhal da Serra,1,0,0,64,0,0,Estadual,1,False,False
+4314498,Pinheirinho do Vale,1,0,0,117,0,0,Estadual,1,False,False
+4314506,Pinheiro Machado,1,0,0,233,0,0,Estadual,1,False,False
+4314548,Pinto Bandeira,1,0,0,41,0,0,Estadual,1,False,False
+4314555,Pirapó,1,0,0,54,0,0,Estadual,1,False,False
+4314605,Piratini,3,0,0,360,0,0,Estadual,3,False,False
+4314704,Planalto,2,0,0,252,0,0,Estadual,2,False,False
+4314787,Ponte Preta,1,0,0,37,0,0,Estadual,1,False,False
+4314779,Pontão,1,0,0,82,0,0,Estadual,1,False,False
+4314902,Porto Alegre,77,2,0,24805,611,0,Estadual + Federal,79,False,False
+4315008,Porto Lucena,1,0,0,63,0,0,Estadual,1,False,False
+4315057,Porto Mauá,1,0,0,34,0,0,Estadual,1,False,False
+4315073,Porto Vera Cruz,1,0,0,30,0,0,Estadual,1,False,False
+4315107,Porto Xavier,3,0,0,261,0,0,Estadual,3,False,False
+4314803,Portão,1,0,0,495,0,0,Estadual,1,False,False
+4315131,Pouso Novo,1,0,0,40,0,0,Estadual,1,False,False
+4314753,Poço das Antas,1,0,0,54,0,0,Estadual,1,False,False
+4315149,Presidente Lucena,1,0,0,55,0,0,Estadual,1,False,False
+4315156,Progresso,1,0,0,166,0,0,Estadual,1,False,False
+4315172,Protásio Alves,1,0,0,40,0,0,Estadual,1,False,False
+4315206,Putinga,1,0,0,87,0,0,Estadual,1,False,False
+4315305,Quaraí,2,0,0,663,0,0,Estadual,2,False,False
+4315313,Quatro Irmãos,1,0,0,16,0,0,Estadual,1,False,False
+4315321,Quevedos,1,0,0,50,0,0,Estadual,1,False,False
+4315354,Quinze de Novembro,1,0,0,110,0,0,Estadual,1,False,False
+4315404,Redentora,3,0,0,377,0,0,Estadual,3,False,False
+4315453,Relvado,1,0,0,54,0,0,Estadual,1,False,False
+4315503,Restinga Sêca,1,0,0,322,0,0,Estadual,1,False,False
+4315602,Rio Grande,14,0,0,4081,0,0,Estadual,14,False,False
+4315701,Rio Pardo,5,0,0,812,0,0,Estadual,5,False,False
+4315552,Rio dos Índios,1,0,0,80,0,0,Estadual,1,False,False
+4315750,Riozinho,1,0,0,131,0,0,Estadual,1,False,False
+4315800,Roca Sales,1,0,0,162,0,0,Estadual,1,False,False
+4315909,Rodeio Bonito,1,0,0,146,0,0,Estadual,1,False,False
+4315958,Rolador,1,0,0,59,0,0,Estadual,1,False,False
+4316006,Rolante,1,0,0,486,0,0,Estadual,1,False,False
+4316105,Ronda Alta,2,0,0,218,0,0,Estadual,2,False,False
+4316204,Rondinha,1,0,0,103,0,0,Estadual,1,False,False
+4316303,Roque Gonzales,1,0,0,110,0,0,Estadual,1,False,False
+4316402,Rosário do Sul,2,0,0,860,0,0,Estadual,2,False,False
+4316428,Sagrada Família,1,0,0,74,0,0,Estadual,1,False,False
+4316436,Saldanha Marinho,1,0,0,53,0,0,Estadual,1,False,False
+4316451,Salto do Jacuí,2,0,0,237,0,0,Estadual,2,False,False
+4316477,Salvador das Missões,1,0,0,61,0,0,Estadual,1,False,False
+4316501,Salvador do Sul,1,0,0,268,0,0,Estadual,1,False,False
+4316600,Sananduva,1,0,0,439,0,0,Estadual,1,False,False
+4317103,Sant'Ana do Livramento,11,0,0,1649,0,0,Estadual,11,False,False
+4316709,Santa Bárbara do Sul,1,0,0,195,0,0,Estadual,1,False,False
+4316733,Santa Cecília do Sul,1,0,0,33,0,0,Estadual,1,False,False
+4316758,Santa Clara do Sul,1,0,0,227,0,0,Estadual,1,False,False
+4316808,Santa Cruz do Sul,11,0,0,2576,0,0,Estadual,11,False,False
+4316972,Santa Margarida do Sul,1,0,0,41,0,0,Estadual,1,False,False
+4316907,Santa Maria,24,2,0,5054,491,0,Estadual + Federal,26,False,False
+4316956,Santa Maria do Herval,1,0,0,150,0,0,Estadual,1,False,False
+4317202,Santa Rosa,6,0,0,1337,0,0,Estadual,6,False,False
+4317251,Santa Tereza,1,0,0,22,0,0,Estadual,1,False,False
+4317301,Santa Vitória do Palmar,2,0,1,839,0,109,Estadual + Municipal,3,False,True
+4317004,Santana da Boa Vista,1,0,0,177,0,0,Estadual,1,False,False
+4317400,Santiago,5,0,0,1086,0,0,Estadual,5,False,False
+4317608,Santo Antônio da Patrulha,4,0,0,899,0,0,Estadual,4,False,False
+4317707,Santo Antônio das Missões,2,0,0,167,0,0,Estadual,2,False,False
+4317558,Santo Antônio do Palma,1,0,0,59,0,0,Estadual,1,False,False
+4317756,Santo Antônio do Planalto,1,0,0,62,0,0,Estadual,1,False,False
+4317806,Santo Augusto,2,0,0,332,0,0,Estadual,2,False,False
+4317905,Santo Cristo,1,0,0,280,0,0,Estadual,1,False,False
+4317954,Santo Expedito do Sul,1,0,0,65,0,0,Estadual,1,False,False
+4317509,Santo Ângelo,10,0,0,1547,0,0,Estadual,10,False,False
+4319901,Sapiranga,4,0,0,1975,0,0,Estadual,4,False,False
+4320008,Sapucaia do Sul,6,0,0,2639,0,0,Estadual,6,False,False
+4320107,Sarandi,1,0,0,468,0,0,Estadual,1,False,False
+4320206,Seberi,1,0,0,253,0,0,Estadual,1,False,False
+4320230,Sede Nova,1,0,0,45,0,0,Estadual,1,False,False
+4320263,Segredo,1,0,0,153,0,0,Estadual,1,False,False
+4320305,Selbach,1,0,0,92,0,0,Estadual,1,False,False
+4320321,Senador Salgado Filho,1,0,0,62,0,0,Estadual,1,False,False
+4320354,Sentinela do Sul,1,0,0,154,0,0,Estadual,1,False,False
+4320404,Serafina Corrêa,1,0,0,485,0,0,Estadual,1,False,False
+4320503,Sertão,1,0,0,93,0,0,Estadual,1,False,False
+4320552,Sertão Santana,1,0,0,202,0,0,Estadual,1,False,False
+4320578,Sete de Setembro,1,0,0,45,0,0,Estadual,1,False,False
+4320602,Severiano de Almeida,1,0,0,86,0,0,Estadual,1,False,False
+4320651,Silveira Martins,1,0,0,73,0,0,Estadual,1,False,False
+4320677,Sinimbu,1,0,0,178,0,0,Estadual,1,False,False
+4320701,Sobradinho,1,0,0,342,0,0,Estadual,1,False,False
+4320800,Soledade,5,0,0,713,0,0,Estadual,5,False,False
+4318002,São Borja,9,1,0,1266,328,0,Estadual + Federal,10,False,False
+4318051,São Domingos do Sul,1,0,0,50,0,0,Estadual,1,False,False
+4318101,São Francisco de Assis,3,0,0,417,0,0,Estadual,3,False,False
+4318200,São Francisco de Paula,2,0,0,427,0,0,Estadual,2,False,False
+4318309,São Gabriel,6,0,1,1418,0,109,Estadual + Municipal,7,False,True
+4318408,São Jerônimo,2,0,0,491,0,0,Estadual,2,False,False
+4318440,São Jorge,1,0,0,77,0,0,Estadual,1,False,False
+4318457,São José das Missões,1,0,0,66,0,0,Estadual,1,False,False
+4318465,São José do Herval,1,0,0,62,0,0,Estadual,1,False,False
+4318481,São José do Hortêncio,1,0,0,119,0,0,Estadual,1,False,False
+4318499,São José do Inhacorá,1,0,0,52,0,0,Estadual,1,False,False
+4318507,São José do Norte,3,0,0,782,0,0,Estadual,3,False,False
+4318606,São José do Ouro,1,0,0,165,0,0,Estadual,1,False,False
+4318614,São José do Sul,1,0,0,42,0,0,Estadual,1,False,False
+4318622,São José dos Ausentes,1,0,0,98,0,0,Estadual,1,False,False
+4318424,São João da Urtiga,1,0,0,96,0,0,Estadual,1,False,False
+4318432,São João do Polêsine,1,0,0,91,0,0,Estadual,1,False,False
+4318705,São Leopoldo,13,0,0,4338,0,0,Estadual,13,False,False
+4318804,São Lourenço do Sul,3,0,0,824,0,0,Estadual,3,False,False
+4318903,São Luiz Gonzaga,5,0,0,707,0,0,Estadual,5,False,False
+4319000,São Marcos,2,0,0,519,0,0,Estadual,2,False,False
+4319109,São Martinho,1,0,0,87,0,0,Estadual,1,False,False
+4319125,São Martinho da Serra,1,0,0,81,0,0,Estadual,1,False,False
+4319158,São Miguel das Missões,1,0,0,208,0,0,Estadual,1,False,False
+4319208,São Nicolau,2,0,0,132,0,0,Estadual,2,False,False
+4319307,São Paulo das Missões,1,0,0,118,0,0,Estadual,1,False,False
+4319364,São Pedro das Missões,1,0,0,61,0,0,Estadual,1,False,False
+4319372,São Pedro do Butiá,1,0,0,99,0,0,Estadual,1,False,False
+4319406,São Pedro do Sul,1,0,0,329,0,0,Estadual,1,False,False
+4319505,São Sebastião do Caí,2,0,0,518,0,0,Estadual,2,False,False
+4319604,São Sepé,3,0,0,504,0,0,Estadual,3,False,False
+4319703,São Valentim,1,0,0,64,0,0,Estadual,1,False,False
+4319711,São Valentim do Sul,1,0,0,39,0,0,Estadual,1,False,False
+4319737,São Valério do Sul,2,0,0,86,0,0,Estadual,2,False,False
+4319752,São Vendelino,1,0,0,61,0,0,Estadual,1,False,False
+4319802,São Vicente do Sul,1,0,0,133,0,0,Estadual,1,False,False
+4320453,Sério,1,0,0,32,0,0,Estadual,1,False,False
+4320859,Tabaí,1,0,0,250,0,0,Estadual,1,False,False
+4320909,Tapejara,1,0,0,595,0,0,Estadual,1,False,False
+4321006,Tapera,3,0,0,262,0,0,Estadual,3,False,False
+4321105,Tapes,1,0,0,345,0,0,Estadual,1,False,False
+4321204,Taquara,4,0,1,849,0,199,Estadual + Municipal,5,False,True
+4321303,Taquari,4,0,0,572,0,0,Estadual,4,False,False
+4321329,Taquaruçu do Sul,1,0,0,27,0,0,Estadual,1,False,False
+4321352,Tavares,1,0,0,143,0,0,Estadual,1,False,False
+4321402,Tenente Portela,2,0,0,206,0,0,Estadual,2,False,False
+4321436,Terra de Areia,1,0,0,291,0,0,Estadual,1,False,False
+4321451,Teutônia,2,0,0,825,0,0,Estadual,2,False,False
+4321469,Tio Hugo,1,0,0,78,0,0,Estadual,1,False,False
+4321477,Tiradentes do Sul,1,0,0,144,0,0,Estadual,1,False,False
+4321493,Toropi,1,0,0,65,0,0,Estadual,1,False,False
+4321501,Torres,4,0,0,1078,0,0,Estadual,4,False,False
+4321600,Tramandaí,3,0,0,1327,0,0,Estadual,3,False,False
+4321626,Travesseiro,1,0,0,44,0,0,Estadual,1,False,False
+4321956,Trindade do Sul,1,0,0,226,0,0,Estadual,1,False,False
+4322004,Triunfo,2,0,3,275,0,571,Estadual + Municipal,5,False,True
+4321634,Três Arroios,1,0,0,52,0,0,Estadual,1,False,False
+4321667,Três Cachoeiras,1,0,0,233,0,0,Estadual,1,False,False
+4321709,Três Coroas,1,0,0,671,0,0,Estadual,1,False,False
+4321832,Três Forquilhas,1,0,0,108,0,0,Estadual,1,False,False
+4321857,Três Palmeiras,1,0,0,151,0,0,Estadual,1,False,False
+4321907,Três Passos,3,0,0,554,0,0,Estadual,3,False,False
+4321808,Três de Maio,2,0,0,475,0,0,Estadual,2,False,False
+4322103,Tucunduva,1,0,0,114,0,0,Estadual,1,False,False
+4322152,Tunas,1,0,0,102,0,0,Estadual,1,False,False
+4322186,Tupanci do Sul,1,0,0,32,0,0,Estadual,1,False,False
+4322202,Tupanciretã,2,0,0,553,0,0,Estadual,2,False,False
+4322251,Tupandi,1,0,0,113,0,0,Estadual,1,False,False
+4322301,Tuparendi,1,0,0,87,0,0,Estadual,1,False,False
+4322327,Turuçu,1,0,0,142,0,0,Estadual,1,False,False
+4322343,Ubiretama,1,0,0,36,0,0,Estadual,1,False,False
+4322376,Unistalda,1,0,0,61,0,0,Estadual,1,False,False
+4322350,União da Serra,1,0,0,25,0,0,Estadual,1,False,False
+4322400,Uruguaiana,13,0,0,3392,0,0,Estadual,13,False,False
+4322509,Vacaria,5,0,0,1575,0,0,Estadual,5,False,False
+4322541,Vale Real,1,0,0,122,0,0,Estadual,1,False,False
+4322525,Vale Verde,1,0,0,85,0,0,Estadual,1,False,False
+4322533,Vale do Sol,1,0,0,160,0,0,Estadual,1,False,False
+4322558,Vanini,1,0,0,41,0,0,Estadual,1,False,False
+4322608,Venâncio Aires,8,0,0,1266,0,0,Estadual,8,False,False
+4322707,Vera Cruz,1,0,0,618,0,0,Estadual,1,False,False
+4322806,Veranópolis,1,1,0,286,155,0,Estadual + Federal,2,False,False
+4322855,Vespasiano Corrêa,1,0,0,33,0,0,Estadual,1,False,False
+4322905,Viadutos,1,0,0,65,0,0,Estadual,1,False,False
+4323002,Viamão,19,0,0,5670,0,0,Estadual,19,False,False
+4323101,Vicente Dutra,1,0,0,124,0,0,Estadual,1,False,False
+4323200,Victor Graeff,1,0,0,91,0,0,Estadual,1,False,False
+4323309,Vila Flores,1,0,0,61,0,0,Estadual,1,False,False
+4323358,Vila Lângaro,1,0,0,53,0,0,Estadual,1,False,False
+4323408,Vila Maria,1,0,0,98,0,0,Estadual,1,False,False
+4323457,Vila Nova do Sul,1,0,0,122,0,0,Estadual,1,False,False
+4323507,Vista Alegre,1,0,0,64,0,0,Estadual,1,False,False
+4323606,Vista Alegre do Prata,1,0,0,43,0,0,Estadual,1,False,False
+4323705,Vista Gaúcha,1,0,0,65,0,0,Estadual,1,False,False
+4323754,Vitória das Missões,1,0,0,87,0,0,Estadual,1,False,False
+4323770,Westfália,1,0,0,85,0,0,Estadual,1,False,False
+4323804,Xangri-lá,1,0,0,409,0,0,Estadual,1,False,False
+4300059,Água Santa,1,0,0,117,0,0,Estadual,1,False,False
+4301552,Áurea,1,0,0,93,0,0,Estadual,1,False,False

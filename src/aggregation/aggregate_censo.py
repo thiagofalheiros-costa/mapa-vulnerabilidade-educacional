@@ -3,17 +3,18 @@ Agregação municipal do Censo Escolar.
 
 Este módulo agrega informações no nível da escola para o nível
 municipal, produzindo indicadores de infraestrutura, localização,
-dependência administrativa e matrículas.
+dependência administrativa e matrículas do Ensino Médio propedêutico.
 """
 
 import pandas as pd
+
 
 REQUIRED_COLUMNS = [
     "CO_MUNICIPIO",
     "NO_MUNICIPIO",
     "SG_UF",
     "CO_ENTIDADE",
-    "QT_MAT_BAS",
+    "QT_MAT_MED_PROP",
     "INFRA_SCORE",
     "IS_RURAL",
     "IS_ESTADUAL",
@@ -95,7 +96,7 @@ def aggregate_by_municipality(
                 "nunique",
             ),
             NUM_MATRICULAS=(
-                "QT_MAT_BAS",
+                "QT_MAT_MED_PROP",
                 lambda series: series.sum(min_count=1),
             ),
             INFRA_MEDIA=(

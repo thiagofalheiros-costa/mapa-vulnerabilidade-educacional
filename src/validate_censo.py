@@ -111,7 +111,7 @@ def validate_enrollment(
     Verifica se a quantidade de matrículas possui valores negativos.
     """
     negative_count = int(
-        (df["QT_MAT_BAS"].dropna() < 0).sum()
+        (df["QT_MAT_MED_PROP"].dropna() < 0).sum()
     )
 
     if negative_count > 0:

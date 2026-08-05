@@ -34,7 +34,7 @@ DOCS_DIR = PROJECT_ROOT / "docs"
 # Bases de dados
 # ==========================================================
 
-CENSO_DIR = RAW_DIR / "censo_escolar"
+CENSO_DIR = RAW_DIR / "censo_escolar" / "2024" / "dados"
 RENDIMENTO_DIR = RAW_DIR / "rendimento" / "2024"
 DISTORCAO_DIR = RAW_DIR / "distorcao"
 INSE_DIR = RAW_DIR / "inse"

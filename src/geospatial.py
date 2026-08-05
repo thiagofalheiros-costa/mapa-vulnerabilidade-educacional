@@ -337,7 +337,7 @@ def merge_municipality_geodata(
     boundary_code_column: str = "CO_MUNICIPIO",
     index_code_column: str = "CO_MUNICIPIO",
     indicator_column: str = "IVE",
-    expected_municipalities: int | None = 497,
+    expected_municipalities: int | None = None,
 ) -> gpd.GeoDataFrame:
     """
     Integra a malha municipal com a base do IVE.
@@ -518,7 +518,7 @@ def validate_geodata(
     geodata: gpd.GeoDataFrame,
     code_column: str = "CO_MUNICIPIO",
     indicator_column: str = "IVE",
-    expected_municipalities: int | None = 497,
+    expected_municipalities: int | None = None,
 ) -> dict[str, Any]:
     """
     Gera um resumo da qualidade da base geoespacial.

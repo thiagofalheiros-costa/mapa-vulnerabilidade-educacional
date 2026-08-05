@@ -65,7 +65,7 @@ def validate_input_file(
 
 def validate_municipality_features(
     dataframe: pd.DataFrame,
-    expected_municipalities: int = 497,
+    expected_municipalities: int = 496,
 ) -> None:
     """
     Valida a base municipal criada.

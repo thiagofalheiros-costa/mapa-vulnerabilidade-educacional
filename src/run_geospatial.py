@@ -85,7 +85,7 @@ def main() -> None:
         boundary_code_column="CO_MUNICIPIO",
         index_code_column="CO_MUNICIPIO",
         indicator_column="IVE",
-        expected_municipalities=497,
+        expected_municipalities=496,
     )
 
     logger.info(
@@ -104,7 +104,7 @@ def main() -> None:
         geodata=geodata,
         code_column="CO_MUNICIPIO",
         indicator_column="IVE",
-        expected_municipalities=497,
+        expected_municipalities=496,
     )
 
     validation_report_path = (

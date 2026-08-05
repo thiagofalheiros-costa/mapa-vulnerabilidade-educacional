@@ -16,10 +16,13 @@ from src.config import (
 )
 from src.logger import setup_logger
 
+
 logger = setup_logger()
 
 
-def validate_input_file(file_path: Path) -> None:
+def validate_input_file(
+    file_path: Path,
+) -> None:
     """
     Verifica se um arquivo de entrada existe.
 
@@ -59,7 +62,9 @@ def validate_unique_municipalities(
     ValueError
         Caso existam códigos municipais duplicados.
     """
-    duplicated = dataframe["CO_MUNICIPIO"].duplicated(
+    duplicated = dataframe[
+        "CO_MUNICIPIO"
+    ].duplicated(
         keep=False,
     )
 
@@ -83,9 +88,16 @@ def validate_unique_municipalities(
 def validate_municipality_coverage(
     features: pd.DataFrame,
     indicators: pd.DataFrame,
-) -> None:
+) -> list[int]:
     """
     Compara a cobertura municipal das bases de entrada.
+
+    A base de características define o universo analítico:
+    municípios com oferta pública de Ensino Médio propedêutico.
+
+    Municípios presentes apenas na base de indicadores são aceitos,
+    pois não possuem escolas no recorte definido e serão excluídos
+    da base consolidada.
 
     Parameters
     ----------
@@ -95,27 +107,101 @@ def validate_municipality_coverage(
     indicators:
         Base de indicadores educacionais.
 
+    Returns
+    -------
+    list[int]
+        Códigos presentes apenas na base de indicadores.
+
     Raises
     ------
     ValueError
-        Caso os conjuntos de municípios sejam diferentes.
+        Caso algum município da base de características não esteja
+        disponível na base de indicadores.
     """
-    feature_codes = set(features["CO_MUNICIPIO"])
-    indicator_codes = set(indicators["CO_MUNICIPIO"])
+    feature_codes = set(
+        features["CO_MUNICIPIO"]
+    )
+
+    indicator_codes = set(
+        indicators["CO_MUNICIPIO"]
+    )
 
     missing_in_indicators = sorted(
         feature_codes - indicator_codes
     )
 
-    missing_in_features = sorted(
+    excluded_from_features = sorted(
         indicator_codes - feature_codes
     )
 
-    if missing_in_indicators or missing_in_features:
+    if missing_in_indicators:
         raise ValueError(
-            "As bases possuem coberturas municipais diferentes. "
-            f"Ausentes nos indicadores: {missing_in_indicators[:10]}. "
-            f"Ausentes nas características: {missing_in_features[:10]}."
+            "Existem municípios com oferta de Ensino Médio "
+            "propedêutico sem indicadores educacionais. "
+            f"Códigos: {missing_in_indicators[:10]}."
+        )
+
+    if excluded_from_features:
+        logger.warning(
+            "%s município(s) da base de indicadores não possuem "
+            "oferta pública de Ensino Médio propedêutico e serão "
+            "excluídos da base consolidada. Códigos: %s",
+            len(excluded_from_features),
+            excluded_from_features[:10],
+        )
+
+    return excluded_from_features
+
+
+def validate_merged_indicators(
+    municipality_base: pd.DataFrame,
+    indicator_columns: list[str],
+) -> None:
+    """
+    Verifica se algum município ficou sem todos os indicadores
+    após a integração.
+
+    Parameters
+    ----------
+    municipality_base:
+        Base municipal consolidada.
+
+    indicator_columns:
+        Colunas oriundas da base de indicadores.
+    """
+    indicator_value_columns = [
+        column
+        for column in indicator_columns
+        if column != "CO_MUNICIPIO"
+    ]
+
+    if not indicator_value_columns:
+        raise ValueError(
+            "Nenhuma coluna de indicador foi encontrada "
+            "para a integração."
+        )
+
+    municipalities_without_indicators = (
+        municipality_base[
+            indicator_value_columns
+        ]
+        .isna()
+        .all(axis=1)
+    )
+
+    if municipalities_without_indicators.any():
+        missing_codes = (
+            municipality_base.loc[
+                municipalities_without_indicators,
+                "CO_MUNICIPIO",
+            ]
+            .astype(str)
+            .tolist()
+        )
+
+        raise ValueError(
+            "Foram encontrados municípios sem nenhum indicador "
+            f"após a integração: {missing_codes[:10]}."
         )
 
 
@@ -143,22 +229,30 @@ def build_municipality_base(
     pandas.DataFrame
         Base municipal consolidada.
     """
-    validate_input_file(features_path)
-    validate_input_file(indicators_path)
+    validate_input_file(
+        features_path
+    )
+    validate_input_file(
+        indicators_path
+    )
 
     logger.info(
         "Carregando características municipais: %s",
         features_path,
     )
 
-    features = pd.read_parquet(features_path)
+    features = pd.read_parquet(
+        features_path
+    )
 
     logger.info(
         "Carregando indicadores municipais: %s",
         indicators_path,
     )
 
-    indicators = pd.read_parquet(indicators_path)
+    indicators = pd.read_parquet(
+        indicators_path
+    )
 
     validate_unique_municipalities(
         features,
@@ -170,7 +264,7 @@ def build_municipality_base(
         "municipality_indicators",
     )
 
-    validate_municipality_coverage(
+    excluded_codes = validate_municipality_coverage(
         features,
         indicators,
     )
@@ -185,7 +279,9 @@ def build_municipality_base(
     ]
 
     municipality_base = features.merge(
-        indicators[indicator_columns],
+        indicators[
+            indicator_columns
+        ],
         on="CO_MUNICIPIO",
         how="left",
         validate="one_to_one",
@@ -198,10 +294,19 @@ def build_municipality_base(
             f"{len(municipality_base)} depois."
         )
 
+    validate_merged_indicators(
+        municipality_base=municipality_base,
+        indicator_columns=indicator_columns,
+    )
+
     municipality_base = (
         municipality_base
-        .sort_values("CO_MUNICIPIO")
-        .reset_index(drop=True)
+        .sort_values(
+            "CO_MUNICIPIO"
+        )
+        .reset_index(
+            drop=True
+        )
     )
 
     logger.info(
@@ -209,6 +314,21 @@ def build_municipality_base(
         municipality_base.shape[0],
         municipality_base.shape[1],
     )
+
+    logger.info(
+        "Universo analítico consolidado: %s municípios com oferta "
+        "pública de Ensino Médio propedêutico.",
+        municipality_base[
+            "CO_MUNICIPIO"
+        ].nunique(),
+    )
+
+    if excluded_codes:
+        logger.info(
+            "Municípios excluídos por ausência de oferta "
+            "no recorte: %s",
+            excluded_codes,
+        )
 
     return municipality_base
 
@@ -262,7 +382,9 @@ def main() -> None:
     )
 
     print("\nDimensão da base municipal:")
-    print(municipality_base.shape)
+    print(
+        municipality_base.shape
+    )
 
     print("\nQuantidade de municípios:")
     print(
@@ -276,7 +398,9 @@ def main() -> None:
         municipality_base
         .isna()
         .sum()
-        .sort_values(ascending=False)
+        .sort_values(
+            ascending=False
+        )
         .to_string()
     )
 
@@ -284,11 +408,15 @@ def main() -> None:
     print(
         municipality_base
         .head()
-        .to_string(index=False)
+        .to_string(
+            index=False
+        )
     )
 
     print("\nArquivo gerado em:")
-    print(output_path)
+    print(
+        output_path
+    )
 
 
 if __name__ == "__main__":

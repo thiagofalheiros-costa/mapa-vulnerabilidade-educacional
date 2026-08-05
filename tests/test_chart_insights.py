@@ -39,7 +39,7 @@ def scatter_summary() -> str:
         "IVE máximo: 0,648\n"
         "Infraestrutura mínima: 0,310\n"
         "Infraestrutura máxima: 0,920\n"
-        "Municípios analisados: 497"
+        "Municípios analisados: 496"
     )
 
 
