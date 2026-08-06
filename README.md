@@ -10,7 +10,7 @@ Projeto de Ciência de Dados aplicado às políticas públicas educacionais, des
 
 O projeto organiza dados públicos educacionais e territoriais em uma base analítica municipal e constrói o **Índice de Vulnerabilidade Educacional (IVE)**, sintetizando diferentes dimensões associadas ao fluxo escolar, à infraestrutura e ao contexto socioeconômico.
 
-A solução combina engenharia de dados, análise estatística, geoprocessamento, visualização interativa e IA generativa. O resultado é um dashboard público que permite explorar o perfil dos 497 municípios do Rio Grande do Sul, identificar territórios prioritários e gerar análises municipais em linguagem natural.
+A solução combina engenharia de dados, análise estatística, geoprocessamento, visualização interativa e IA generativa. O resultado é um dashboard público que permite explorar o perfil de 496 municípios do Rio Grande do Sul, identificar territórios prioritários e gerar análises municipais em linguagem natural.
 
 ## Aplicação online
 
@@ -26,8 +26,8 @@ O projeto busca transformar bases públicas dispersas em um produto analítico a
 
 ## Principais funcionalidades
 
-- construção de uma base municipal integrada para os 497 municípios do Rio Grande do Sul;
-- cálculo do Índice de Vulnerabilidade Educacional;
+- construção de uma base municipal integrada para o Rio Grande do Sul;
+- cálculo do Índice de Vulnerabilidade Educacional para 496 municípios;
 - classificação absoluta e relativa dos municípios por faixa de vulnerabilidade;
 - ranking municipal;
 - mapas temáticos estáticos e interativos;
@@ -44,9 +44,16 @@ O projeto busca transformar bases públicas dispersas em um produto analítico a
 - **Unidade de análise:** município;
 - **Recorte territorial:** Rio Grande do Sul;
 - **Ano-base principal:** 2024;
-- **Quantidade de municípios:** 497;
+- **Municípios no recorte territorial:** 497;
+- **Municípios com IVE calculado:** 496;
 - **Fontes centrais:** Inep e IBGE;
 - **Produto final:** dashboard interativo com mapa, ranking, diagnóstico municipal e IA generativa.
+
+### Cobertura municipal
+
+O Rio Grande do Sul possui 497 municípios. Entretanto, o IVE foi calculado para 496 deles. Um município não possuía escola com oferta de Ensino Médio no ano analisado e, por esse motivo, não apresentava as informações necessárias para compor os indicadores utilizados no índice.
+
+A exclusão, portanto, não decorre de falha no processamento ou perda acidental de registros, mas de uma decisão metodológica coerente com o recorte do projeto. O dashboard e as análises comparativas consideram apenas os municípios para os quais foi possível construir o conjunto completo de informações exigido pelo IVE.
 
 ## Fontes de dados
 
@@ -116,7 +123,7 @@ As dimensões centrais consideradas são:
 
 A versão manual do índice foi mantida como medida principal após comparação com alternativas produzidas por Análise de Componentes Principais e Análise Fatorial. A validação incluiu correlações, estabilidade de rankings, concordância entre os municípios mais vulneráveis e análise de sensibilidade.
 
-Na base final, o IVE apresentou média de aproximadamente **0,281**, com valores variando entre **0,057** e **0,648**.
+Na base final, o IVE foi calculado para 496 municípios e apresentou média de aproximadamente **0,281**, com valores variando entre **0,057** e **0,648**.
 
 ## Validação estatística
 
@@ -303,13 +310,14 @@ Os testes cobrem, entre outros pontos:
 | 11 | otimização do mapa e organização dos componentes | concluída |
 | 12 | refatoração, cache e testes de regressão | concluída |
 | 13 | deploy no Streamlit Community Cloud | concluída |
-| 14 | documentação open source e preparação da versão 1.0 | em andamento |
+| 14 | documentação open source e preparação da versão 1.0 | concluída |
 
 ## Limitações
 
 - o índice resume dimensões complexas em uma única medida sintética;
 - os resultados dependem da cobertura e da qualidade das bases públicas;
 - o recorte atual está concentrado no Rio Grande do Sul e no ano-base de 2024;
+- um dos 497 municípios do estado não integra o IVE por não possuir escola com oferta de Ensino Médio no ano analisado;
 - a associação entre indicadores não deve ser interpretada automaticamente como causalidade;
 - os textos produzidos pela IA são recursos de apoio e devem ser analisados criticamente.
 
