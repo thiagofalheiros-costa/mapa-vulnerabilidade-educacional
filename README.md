@@ -305,17 +305,6 @@ Os testes cobrem, entre outros pontos:
 | 13 | deploy no Streamlit Community Cloud | concluída |
 | 14 | documentação open source e preparação da versão 1.0 | em andamento |
 
-## Próximas melhorias
-
-- documentação técnica completa em `docs/`;
-- dicionário de variáveis;
-- inclusão de séries históricas;
-- comparação direta entre municípios;
-- expansão para outros estados;
-- incorporação de novos indicadores sociais e territoriais;
-- versionamento de releases;
-- criação de material visual e demonstração em GIF.
-
 ## Limitações
 
 - o índice resume dimensões complexas em uma única medida sintética;
@@ -327,9 +316,3 @@ Os testes cobrem, entre outros pontos:
 ## Autor
 
 **Thiago Falheiros**
-
-Projeto desenvolvido como case de portfólio em Ciência de Dados, Engenharia de Dados, análise de políticas públicas, geoprocessamento e IA generativa.
-
-## Status do projeto
-
-Aplicação publicada e funcional. A Sprint 14 está dedicada à consolidação da documentação e à preparação da primeira release estável.
