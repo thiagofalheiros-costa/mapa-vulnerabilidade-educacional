@@ -46,7 +46,7 @@ DOCS_DIR = PROJECT_ROOT / "docs"
 CENSO_DIR = RAW_DIR / "censo_escolar" / str(ANO_BASE)
 RENDIMENTO_DIR = RAW_DIR / "rendimento" / str(ANO_BASE)
 DISTORCAO_DIR = RAW_DIR / "distorcao" / str(ANO_BASE)
-INSE_DIR = RAW_DIR / "inse" / str(ANO_BASE)
+INSE_DIR = RAW_DIR / "inse" / 2023
 IBGE_DIR = RAW_DIR / "ibge" / str(ANO_BASE)
 MALHA_DIR = RAW_DIR / "malha_municipal" / str(ANO_BASE)
 
