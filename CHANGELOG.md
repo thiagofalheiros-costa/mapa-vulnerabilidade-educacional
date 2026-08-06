@@ -4,7 +4,7 @@ Todas as alterações relevantes do **Mapa da Vulnerabilidade Educacional** são
 
 O formato segue, de maneira adaptada, as recomendações do [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e os princípios de [Versionamento Semântico](https://semver.org/lang/pt-BR/). As versões anteriores à `1.0.0` representam marcos de desenvolvimento do projeto e não necessariamente correspondem a releases publicadas no GitHub.
 
-## [Não publicado]
+## [1.0.0] - 2026-08-06
 
 ### Adicionado
 
@@ -13,18 +13,26 @@ O formato segue, de maneira adaptada, as recomendações do [Keep a Changelog](h
 - documentação metodológica completa do Índice de Vulnerabilidade Educacional;
 - dicionário analítico das variáveis;
 - documentação revisada das fontes de dados;
-- primeira versão do README profissional em português.
+- README profissional em português;
+- licença MIT;
+- changelog consolidado do desenvolvimento do projeto.
 
 ### Alterado
 
-- reorganização da documentação para a preparação da versão `1.0.0`;
-- atualização da apresentação do projeto, refletindo o dashboard publicado, a validação estatística e a integração com IA generativa.
+- reorganização da documentação para a primeira versão estável;
+- atualização da apresentação do projeto, refletindo o dashboard publicado, a validação estatística e a integração com IA generativa;
+- reorganização do `src/config.py`, com caminhos e constantes agrupados por natureza;
+- padronização dos diretórios de dados brutos;
+- limpeza e reorganização das regras do `.gitignore`;
+- inclusão explícita das três bases processadas necessárias ao dashboard no versionamento.
 
-### Pendente
+### Removido
 
-- revisão visual do README com imagens e banner;
-- inclusão da licença do projeto;
-- criação da primeira release estável no GitHub.
+- arquivos vazios e sem utilização:
+  - `src/download_data.py`;
+  - `src/feature_engineering.py`;
+  - `dashboard/components/metrics.py`;
+  - `docs/metodologia.md`.
 
 ## [0.13.0] - 2026-08-06
 
@@ -250,17 +258,4 @@ O formato segue, de maneira adaptada, as recomendações do [Keep a Changelog](h
 - definição do município como unidade de análise do MVP;
 - adoção do Rio Grande do Sul como recorte territorial inicial.
 
-[Não publicado]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/compare/v0.13.0...HEAD
-[0.13.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.13.0
-[0.12.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.12.0
-[0.11.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.11.0
-[0.10.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.10.0
-[0.9.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.9.0
-[0.8.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.8.0
-[0.7.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.7.0
-[0.6.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.6.0
-[0.5.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.5.0
-[0.4.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.4.0
-[0.3.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.3.0
-[0.2.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.2.0
-[0.1.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v0.1.0
+[1.0.0]: https://github.com/thiagofalheiros-costa/mapa-vulnerabilidade-educacional/releases/tag/v1.0.0
