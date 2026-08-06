@@ -1,76 +1,88 @@
-# Ambiente virtual
+# ==========================================================
+# Ambientes virtuais
+# ==========================================================
 .venv/
 venv/
+env/
 
+# ==========================================================
 # Python
+# ==========================================================
 __pycache__/
 *.py[cod]
-*.pyopyte
+*$py.class
 *.pyd
-*.pyc
+*.so
 
-
-# Jupyter
-.ipynb_checkpoints/
-
-# VS Code
-.vscode/
-.idea/
-
-# Sistema operacional
-.DS_Store
-Thumbs.db
-
-# Modelos gerados
-models/*.pkl
-models/*.joblib
-
-# Relatórios gerados
-reports/figures/*
-reports/maps/*
-reports/tables/*
-
-# Dados
-data/raw/*
-data/interim/*
-data/processed/*
-data/external/*
-
-# Manter estrutura das pastas
-!data/raw/.gitkeep
-!data/interim/.gitkeep
-!data/processed/.gitkeep
-!data/external/.gitkeep
-!reports/figures/.gitkeep
-!reports/maps/.gitkeep
-!reports/tables/.gitkeep
-
-# Variáveis e credenciais
+# ==========================================================
+# Variáveis de ambiente e credenciais
+# ==========================================================
 .env
 .env.*
 !.env.example
 .streamlit/secrets.toml
-# Logs
-*.log
 
+# ==========================================================
+# Editores e sistema operacional
+# ==========================================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
-# Testes e análise estática
-.pytest_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-
+# ==========================================================
 # Jupyter
+# ==========================================================
 .ipynb_checkpoints/
 
-# Dados brutos e intermediários
-data/raw/
-data/interim/
-data/external/
+# ==========================================================
+# Logs, testes e análise estática
+# ==========================================================
+*.log
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
 
-# Ignorar arquivos processados por padrão
+# ==========================================================
+# Modelos gerados
+# ==========================================================
+models/*.pkl
+models/*.joblib
+
+# ==========================================================
+# Relatórios gerados
+# ==========================================================
+reports/figures/*
+reports/maps/*
+reports/tables/*
+
+# Preservar a estrutura dos diretórios de relatórios
+!reports/figures/.gitkeep
+!reports/maps/.gitkeep
+!reports/tables/.gitkeep
+
+# ==========================================================
+# Dados brutos, intermediários e externos
+# ==========================================================
+data/raw/*
+data/interim/*
+data/external/*
+
+# Preservar a estrutura dos diretórios de dados
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/external/.gitkeep
+
+# ==========================================================
+# Dados processados
+# ==========================================================
 data/processed/*
 
-# Manter as bases necessárias ao dashboard
-!data/processed/municipality_vulnerability.parquet
+# Preservar a estrutura e as bases necessárias ao dashboard
+!data/processed/.gitkeep
 !data/processed/municipality_base.parquet
+!data/processed/municipality_vulnerability.parquet
+!data/processed/municipality_geodata.parquet
